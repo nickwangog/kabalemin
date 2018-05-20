@@ -23,10 +23,11 @@ void        read_ants(t_lem *lem)
     {
         while(line[i])
         {
-            if (!ft_isdigit(line[i]))
+            if (!ft_isdigit(line[i]) || line == NULL)
             {
                 line = NULL;
-                break ;
+                ft_printf("Error, no ants.\n");
+                exit (0);
             }
             i++;
         }
@@ -36,5 +37,14 @@ void        read_ants(t_lem *lem)
 
 void		read_lemin(t_lem *lem)
 {
+    char *line;
+
+    line = NULL;
     read_ants(lem);
+    // while (get_next_line(0, &line) > 0)
+    // {
+    //     if
+    //         read_rooms(line, lem);
+    //         read_links(line, lem);
+    }
 }

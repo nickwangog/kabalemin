@@ -27,7 +27,6 @@
 # include <grp.h>
 # include <uuid/uuid.h>
 # include <errno.h>
-# include "../minilibx/mlx.h"
 # include "../libft/includes/ft_printf.h"
 # define C_RED		"\x1b[31m"
 # define C_GRN		"\x1b[32m"
@@ -44,11 +43,12 @@ typedef struct		s_rooms
 	int				num;
 	int				start;
 	int				end;
-}
+}					t_rooms;
 
 typedef struct		s_lem
 {
 	int				ant_num;
 }					t_lem;
 
+void				read_lemin(t_lem *lem);
 #endif

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lemin.h"
+
 int		main(int argc, char **argv)
 {	
 	t_lem	*lem;
@@ -18,6 +20,7 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 		ft_printf("usage: ./lem-in < (map)\n");
 	lem = (t_lem *)ft_memalloc(sizeof(t_lem));
-	readmap(lem);
+	read_lemin(lem);
+	ft_printf("%d\n", lem->ant_num);
 	return (0);
 }

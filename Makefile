@@ -1,25 +1,30 @@
 NAME = lem-in
-LIBFT = ./libft/libft.a
+LIBDIR = ./libft/libft.a
 SRCDIR = ./srcs/
 LIBDIR = ./libft/
 OBJDIR = ./objs/
 INCDIR = ./includes/
-SRC = $(wildcard $(SRCDIR)*.c)
-OBJ = $(patsubst $(SRCDIR)%.c, objs/%.o, $(SRC))
-LIB = ./libft/objs/ft*.o
-INC = -I $(INCDIR)
+SRCFILES =	main.c \
+			read.c 
+
+OBJFILES =	$(SRCFILES:.c=.o)
+SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))
+OBJ        = $(addprefix $(OBJDIR), $(OBJFILES))
+LIBFT      = $(addprefix $(LIBDIR), libft.a)
 FLAGS = -Wall -Werror -Wextra
 
-all: $(NAME)
+all: obj $(LIBFT) $(NAME)
 
-objs/%.o: srcs/%.c
-	@mkdir -p objs
-	@gcc $(FLAGS) $(INC) -c $^ -o $@
+obj:
+	@mkdir -p $(OBJDIR)
+
+$(OBJDIR)%.o:$(SRCDIR)%.c
+	@gcc $(FLAGS) -I $(INCDIR) -o $@ -c $<
 
 $(LIBFT):
 	@make -C $(LIBDIR)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(OBJ)
 	@gcc -o $(NAME) $(OBJ) $(LIBFT)
 	@echo "Butterhorn!"
 

@@ -95,5 +95,6 @@ int					ft_uintlen(uintmax_t num);
 int					get_next_line(int const fd, char **line);
 int					ft_min(int a, int b);
 int					ft_max(int a, int b);
+int					ft_linedigit(char *s);
 
 #endif

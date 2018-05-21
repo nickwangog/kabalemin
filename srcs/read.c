@@ -20,7 +20,16 @@ void        read_ants(t_lem *lem)
     i = 0;
     line = NULL;
     if (get_next_line(0, &line) > 0)
-    {
+    {   
+        while (line[0] == '#')
+		{
+			ft_memdel((void **)&line);
+			if (get_next_line(0, &line) == -1)
+			{
+				line = NULL;
+				break ;
+			}
+        }
         while(line[i])
         {
             if (!ft_isdigit(line[i]) || line == NULL)
@@ -33,7 +42,16 @@ void        read_ants(t_lem *lem)
         }
     }
     lem->ant_num = (line != NULL && *line != '\0') ? ft_atoi(line) : 0;
+    ft_memdel((void **)&line);
 }
+
+// void        read_rooms(char *s, t_lem *lem)
+// {
+// }
+
+// void        read_rooms(char *s, t_lem *lem)
+// {
+// }
 
 void		read_lemin(t_lem *lem)
 {
@@ -41,10 +59,14 @@ void		read_lemin(t_lem *lem)
 
     line = NULL;
     read_ants(lem);
-    // while (get_next_line(0, &line) > 0)
+    while (get_next_line(0, &line) > 0)
     // {
-    //     if
+    //     if (!ft_strcmp(line, "##start"))
+    //         mark as start room
+    //     if (!ft_strcmp(line, "##end"))
+    //         mark as end room
+    //     if (line[0] == '#')
     //         read_rooms(line, lem);
     //         read_links(line, lem);
-    }
+    // }
 }

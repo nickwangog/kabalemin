@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:26:35 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/21 18:29:53 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/21 18:49:17 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	lem_error(int n)
+void	lem_error(int8_t n)
 {
 	if (n == 1)
 		ft_putstr("Error : invalid ants.\n");

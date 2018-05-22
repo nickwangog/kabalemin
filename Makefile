@@ -5,7 +5,8 @@ LIBDIR = ./libft/
 OBJDIR = ./objs/
 INCDIR = ./includes/
 SRCFILES =	main.c \
-			read.c 
+			read.c \
+			utilities.c
 
 OBJFILES =	$(SRCFILES:.c=.o)
 SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))

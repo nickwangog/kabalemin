@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_linedigit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:21:11 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/21 16:42:10 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/21 18:21:20 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		ft_linedigit(char *s)
 {
-	if (!s || !*s)
-		return (0);
-	while (isdigit(*s))
+	// if (!s || !*s)
+	// 	return (0);
+	while (ft_isdigit(*s))
 		s++;
 	return (*s == '\0');
 }

@@ -65,14 +65,14 @@ void        read_rooms(t_lem *lem)
 			lem->end += !ft_strcmp(lem->line, "##end") ? 1 : 0;
 			ft_strdel(&lem->line);
 			if(lem->start > 1 || lem->end > 1)
-				lem_error(2);
+				lem_error(4);
 		}
 		else if (line_validation(lem))
 			ft_strdel(&lem->line);
 		else
 		{
 			ft_strdel(&lem->line);
-			lem_error(4);
+			lem_error(2);
 		}
 	}
 		

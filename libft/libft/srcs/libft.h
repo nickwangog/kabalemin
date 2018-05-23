@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 20:49:08 by nwang             #+#    #+#             */
-/*   Updated: 2018/04/18 20:16:15 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/22 19:21:36 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int					get_next_line(int const fd, char **line);
 int					ft_min(int a, int b);
 int					ft_max(int a, int b);
 int					ft_linedigit(char *s);
+int					ft_countwords(char *str, char sep);
 
 #endif

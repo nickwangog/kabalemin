@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/22 14:39:49 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/22 19:37:25 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ struct			s_lem
 
 void			read_lemin(t_lem *lem);
 void			lem_error(int8_t n);
-void			check_room(t_lem *lem);
 void			parse_room(t_lem *lem);
+int				countspace(char *s);
 
 #endif

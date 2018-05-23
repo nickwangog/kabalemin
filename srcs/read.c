@@ -40,25 +40,24 @@ int line_validation(t_lem *lem)
 {
 	if (lem->line[0] < 33 || lem->line[0] == 'L')
 		lem_error(2);
-	else if(ft_isdigit(lem->line[0] && ft_strcchr(lem->line, ' '))
+	else if(ft_isdigit(lem->line[0] && ft_strchr(lem->line, ' ')))
 	{
 		check_room(lem);
 		return (1);
 	}
-	else if (ft_isdigit(lem->line[0] && ft_strcchr(lem->line, '-'))
+	else if (ft_isdigit(lem->line[0] && ft_strchr(lem->line, '-')))
 	{
-		check_link(lem);
+		//check_link(lem);
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 void        read_rooms(t_lem *lem)
 {
 	while (get_next_line(0, &lem->line) > 0)
 	{
-		if (lem->line[0] == '#' && lem->line[1] != '#' && ft_strcmp(lem->line, "##end") || ft_strcmp(lem->line, "##start")) // i dont even need that
+		if (lem->line[0] == '#' && lem->line[1] != '#')
 			ft_strdel(&lem->line);
 		else if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
 		{
@@ -72,14 +71,14 @@ void        read_rooms(t_lem *lem)
 			ft_strdel(&lem->line);
 		else
 		{
-			ft_strdel(&lem->line)
+			ft_strdel(&lem->line);
 			lem_error(4);
 		}
 	}
 		
 }
 
-// void        read_rooms(char *s, t_lem *lem)
+// void        read_links(char *s, t_lem *lem)
 // {
 // }
 

@@ -61,13 +61,15 @@ struct			s_lem
 	char		**tab;	
 	int16_t		ant_num;
 	int8_t		start;
-	int8_t		sr_name;
-	int8_t		er_name;
+	int8_t		end;
+	char		*sr_name;
+	char		*er_name;
 	int16_t		num_room;
+	char		*line;
 };
 
 void			read_lemin(t_lem *lem);
-void			lem_error(int n);
+void			lem_error(int8_t n);
 void			check_room(t_lem *lem);
 void			parse_room(t_lem *lem);
 

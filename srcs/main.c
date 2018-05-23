@@ -21,6 +21,9 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 		ft_printf("usage: ./lem-in < (map)\n");
 	read_lemin(&lem);
-	ft_printf("%d\n", lem.ant_num);
+	ft_printf("%d\n", lem.start);
+	ft_printf("%d\n", lem.end);
+	ft_printf("%s\n", lem.sr_name);
+	ft_printf("%s\n", lem.er_name);
 	return (0);
 }

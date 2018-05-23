@@ -21,6 +21,6 @@ void	lem_error(int8_t n)
 	if (n == 3)
 		ft_putstr("Error : invalid links.\n");
 	if (n == 4)
-		ft_putstr("Error : invalid star or end\n");
+		ft_putstr("Error : invalid start or end\n");
 	exit(1);
 }

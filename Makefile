@@ -6,6 +6,7 @@ OBJDIR = ./objs/
 INCDIR = ./includes/
 SRCFILES =	main.c \
 			read.c \
+			room.c \
 			utilities.c
 
 OBJFILES =	$(SRCFILES:.c=.o)

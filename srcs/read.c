@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 00:31:54 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/21 18:49:20 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/22 17:47:30 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,61 @@ void read_ants(t_lem *lem)
 			if(ft_isdigit(lem->line[0]) && ft_linedigit(lem->line))
 			{
 				lem->ant_num = ft_atoi(lem->line);
-				free(lem->line);
+				ft_strdel(&lem->line);
 				if(lem->ant_num < 1)
 					lem_error(1);
 				break ;
 			}
 			else
-				free(lem->line);
+				ft_strdel(&lem->line);
 		}
 		else
 			lem_error(1);
 	}
 }
 
+int line_validation(t_lem *lem)
+{
+	if (lem->line[0] < 33 || lem->line[0] == 'L')
+		lem_error(2);
+	else if(ft_isdigit(lem->line[0] && ft_strcchr(lem->line, ' '))
+	{
+		check_room(lem);
+		return (1);
+	}
+	else if (ft_isdigit(lem->line[0] && ft_strcchr(lem->line, '-'))
+	{
+		check_link(lem);
+		return (1);
+	}
+	else
+		return (0);
+}
+
 void        read_rooms(t_lem *lem)
 {
-// }
+	while (get_next_line(0, &lem->line) > 0)
+	{
+		if (lem->line[0] == '#' && lem->line[1] != '#' && ft_strcmp(lem->line, "##end") || ft_strcmp(lem->line, "##start")) // i dont even need that
+			ft_strdel(&lem->line);
+		else if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
+		{
+			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;
+			lem->end += !ft_strcmp(lem->line, "##end") ? 1 : 0;
+			ft_strdel(&lem->line);
+			if(lem->start > 1 || lem->end > 1)
+				lem_error(2);
+		}
+		else if (line_validation(lem))
+			ft_strdel(&lem->line);
+		else
+		{
+			ft_strdel(&lem->line)
+			lem_error(4);
+		}
+	}
+		
+}
 
 // void        read_rooms(char *s, t_lem *lem)
 // {
@@ -50,17 +89,6 @@ void		read_lemin(t_lem *lem)
 	read_ants(lem);
 	if(!lem->ant_num)
 		lem_error(1);
-	
-	//     ERROR1("no ants");
-
-	// while (get_next_line(0, &line) > 0)
-	// {
-	//     if (!ft_strcmp(line, "##start"))
-	//         mark as start room
-	//     if (!ft_strcmp(line, "##end"))
-	//         mark as end room
-	//     if (line[0] == '#')
-	//         read_rooms(line, lem);
-	//         read_links(line, lem);
-	// }
+	read_rooms(lem);
+		lem_error(2);
 }

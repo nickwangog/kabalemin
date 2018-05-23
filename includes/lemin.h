@@ -6,12 +6,12 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/21 19:01:47 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/22 14:39:49 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_H
-# define LEMIN_H
+#ifndef __LEMIN_H__
+# define __LEMIN_H__
 
 # include <unistd.h>
 # include <dirent.h>
@@ -37,6 +37,8 @@
 # define C_CYN		"\x1b[36m"
 # define C_WHT		"\x1b[37m"
 # define C_RESET	"\x1b[0m"
+# include "../includes/lemin.h"
+
 
 typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;
@@ -46,20 +48,27 @@ struct			s_rooms
 	char		*name;
 	int			num;
 	t_lem		*ant;
-	int8_t		y;
 	int8_t		x;
+	int8_t		y;
+	t_rooms     **con;
+	t_rooms		*next;
 };
 
 struct			s_lem
 {
+	t_rooms		*head;
 	t_rooms		*room;
+	char		**tab;	
 	int16_t		ant_num;
 	int8_t		start;
-	int8_t		sr_index;
-	int8_t		er_index;
+	int8_t		sr_name;
+	int8_t		er_name;
+	int16_t		num_room;
 };
 
 void			read_lemin(t_lem *lem);
 void			lem_error(int n);
+void			check_room(t_lem *lem);
+void			parse_room(t_lem *lem);
 
 #endif

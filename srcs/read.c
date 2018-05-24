@@ -41,6 +41,8 @@ int			line_validation(t_lem *lem)
 		lem_error("invalid rooms");
 	else if (ft_countwords(lem->line, ' ') == 3 && countspace(lem->line) == 2)
 	{
+		if (lem->links == 1)
+			lem_error("invalid links");
 		lem->tab = ft_strsplit(lem->line, ' ');
 		parse_room(lem);
 		return (1);
@@ -48,7 +50,8 @@ int			line_validation(t_lem *lem)
 	else if (ft_strchr(lem->line, '-') && ft_countwords(lem->line, ' ') == 1
 		&& countspace(lem->line) == 0)
 	{
-		check_link(lem);
+		//check_link(lem);
+		lem->links = 1;
 		return (1);
 	}
 	return (0);

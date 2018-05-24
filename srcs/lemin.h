@@ -67,6 +67,7 @@ struct			s_lem
 	char		*er_name;
 	int16_t		num_room;
 	char		*line;
+	int8_t		links;
 };
 
 void			read_lemin(t_lem *lem);

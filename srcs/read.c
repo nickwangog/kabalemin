@@ -18,6 +18,11 @@ void		read_ants(t_lem *lem)
 	{
 		if (!ft_strcmp(lem->line, "##end") || !ft_strcmp(lem->line, "##start"))
 			lem_error("invalid start room or end room");
+		if (lem->line[0] == '#')
+		{
+			ft_strdel(&lem->line);
+			continue ;
+		}
 		if (lem->line)
 		{
 			if (ft_isdigit(lem->line[0]) && ft_linedigit(lem->line))

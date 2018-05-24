@@ -13,9 +13,9 @@
 #include "lemin.h"
 
 int		main(int argc, char **argv)
-{	
+{
 	t_lem	lem;
-	
+
 	ft_bzero(&lem, sizeof(t_lem));
 	(void)argv;
 	if (argc > 1)

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __LEMIN_H__
-# define __LEMIN_H__
+#ifndef LEMIN_H
+# define LEMIN_H
 
 # include <unistd.h>
 # include <dirent.h>
@@ -48,18 +48,18 @@ struct			s_rooms
 	t_lem		*ant;
 	int8_t		x;
 	int8_t		y;
-	t_rooms     **link;
+	t_rooms		**link;
 	t_rooms		*next;
 	int8_t		visited;
 	int8_t		id_ant;
-	int8_t		room_id;              
+	int8_t		room_id;
 };
 
 struct			s_lem
 {
 	t_rooms		*head;
 	t_rooms		*room;
-	char		**tab;	
+	char		**tab;
 	int16_t		ant_num;
 	int8_t		start;
 	int8_t		end;

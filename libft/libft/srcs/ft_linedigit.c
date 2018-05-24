@@ -14,8 +14,6 @@
 
 int		ft_linedigit(char *s)
 {
-	// if (!s || !*s)
-	// 	return (0);
 	while (ft_isdigit(*s))
 		s++;
 	return (*s == '\0');

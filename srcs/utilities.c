@@ -25,7 +25,7 @@ int		countspace(char *s)
 
 	i = 0;
 	space = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == ' ')
 			space++;

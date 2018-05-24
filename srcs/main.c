@@ -19,7 +19,7 @@ int		main(int argc, char **argv)
 	ft_bzero(&lem, sizeof(t_lem));
 	(void)argv;
 	if (argc > 1)
-		ft_printf("usage: ./lem-in < (map)\n");
+		lem_error("usage: ./lem-in < (map)");
 	read_lemin(&lem);
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);

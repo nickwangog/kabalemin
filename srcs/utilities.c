@@ -12,18 +12,9 @@
 
 #include "lemin.h"
 
-void	lem_error(int8_t n)
+void	lem_error(char *s)
 {
-	if (n == 1)
-		ft_putstr("Error : invalid ants.\n");
-	if (n == 2)
-		ft_putstr("Error : invalid rooms.\n");
-	if (n == 3)
-		ft_putstr("Error : invalid links.\n");
-	if (n == 4)
-		ft_putstr("Error : invalid start or end\n");
-	if (n == 5)
-		ft_putstr("Error : malloc error\n");
+	ft_printf("Error: %s.\n", s);
 	exit(1);
 }
 

@@ -70,7 +70,7 @@ struct			s_lem
 };
 
 void			read_lemin(t_lem *lem);
-void			lem_error(int8_t n);
+void			lem_error(char *s);
 void			parse_room(t_lem *lem);
 int				countspace(char *s);
 #endif

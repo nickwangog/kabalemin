@@ -17,7 +17,7 @@ void		read_ants(t_lem *lem)
 	while(get_next_line(0, &lem->line) > 0)
 	{
 		if(!ft_strcmp(lem->line, "##end") || !ft_strcmp(lem->line, "##start"))
-			lem_error(4);
+			lem_error("invalid start room or end room");
 		if(lem->line)
 		{
 			if(ft_isdigit(lem->line[0]) && ft_linedigit(lem->line))
@@ -25,20 +25,20 @@ void		read_ants(t_lem *lem)
 				lem->ant_num = ft_atoi(lem->line);
 				ft_strdel(&lem->line);
 				if(lem->ant_num < 1)
-					lem_error(1);
+					lem_error("invalid ants");
 				break ;
 			}
 			ft_strdel(&lem->line);
-			lem_error(1);
+			lem_error("invalid ants");
 		}
-		lem_error(1);
+		lem_error("invalid ants");
 	}
 }
 
 int			line_validation(t_lem *lem)
 {
 	if (lem->line[0] < 33 || lem->line[0] == 'L')
-		lem_error(2);
+		lem_error("invalid rooms");
 	else if(ft_countwords(lem->line, ' ') == 3 && countspace(lem->line) == 2)
 	{
 		lem->tab = ft_strsplit(lem->line, ' ');
@@ -64,10 +64,10 @@ void		read_rooms(t_lem *lem)
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;
 			lem->end += !ft_strcmp(lem->line, "##end") ? 1 : 0;
-			lem->start == 1  && lem->end == 1 && !lem->sr_name  && !lem->er_name ? lem_error(4) : 0;
+			lem->start == 1  && lem->end == 1 && !lem->sr_name  && !lem->er_name ? lem_error("invalid start room or end room") : 0;
 			ft_strdel(&lem->line);
 			if(lem->start > 1 || lem->end > 1)
-				lem_error(4);
+				lem_error("invalid start room or end room");
 		}
 		else if (lem->line[0] == '#')
 			ft_strdel(&lem->line);
@@ -76,7 +76,7 @@ void		read_rooms(t_lem *lem)
 		else
 		{
 			ft_strdel(&lem->line);
-			lem_error(2);
+			lem_error("invalid rooms");
 		}
 	}
 
@@ -91,8 +91,8 @@ void		read_lemin(t_lem *lem)
 
 	read_ants(lem);
 	if (!lem->ant_num)
-		lem_error(1);
+		lem_error("invalid ants");
 	read_rooms(lem);
 	if (lem->start != 1 || lem->end != 1)
-		lem_error(4);
+		lem_error("invalid start room or end room");
 }

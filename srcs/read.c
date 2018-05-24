@@ -48,7 +48,7 @@ int			line_validation(t_lem *lem)
 	else if (ft_strchr(lem->line, '-') && ft_countwords(lem->line, ' ') == 1
 		&& countspace(lem->line) == 0)
 	{
-		//check_link(lem);
+		check_link(lem);
 		return (1);
 	}
 	return (0);
@@ -82,10 +82,6 @@ void		read_rooms(t_lem *lem)
 	}
 }
 
-// void        read_links(char *s, t_lem *lem)
-// {
-// }
-
 void		read_lemin(t_lem *lem)
 {
 	read_ants(lem);
@@ -94,4 +90,6 @@ void		read_lemin(t_lem *lem)
 	read_rooms(lem);
 	if (lem->start != 1 || lem->end != 1)
 		lem_error("invalid start room or end room");
+	// if missing links, no valid path
+	// 	error
 }

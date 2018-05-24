@@ -6,8 +6,9 @@ OBJDIR = ./objs/
 INCDIR = ./includes/
 SRCFILES =	main.c \
 			read.c \
-			room.c \
-			utilities.c
+			rooms.c \
+			utilities.c \
+			links.c
 
 OBJFILES =	$(SRCFILES:.c=.o)
 SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))

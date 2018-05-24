@@ -50,6 +50,8 @@ int			line_validation(t_lem *lem)
 	else if (ft_strchr(lem->line, '-') && ft_countwords(lem->line, ' ') == 1
 		&& countspace(lem->line) == 0)
 	{
+		if (lem->sr_name == NULL || lem->er_name == NULL)
+			lem_error("invalid start room or end room");
 		//check_link(lem);
 		lem->links = 1;
 		return (1);

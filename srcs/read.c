@@ -6,13 +6,13 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 00:31:54 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/22 22:11:48 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/23 12:48:43 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void read_ants(t_lem *lem)
+void		read_ants(t_lem *lem)
 {
 	while(get_next_line(0, &lem->line) > 0)
 	{
@@ -35,7 +35,7 @@ void read_ants(t_lem *lem)
 	}
 }
 
-int line_validation(t_lem *lem)
+int			line_validation(t_lem *lem)
 {
 	if (lem->line[0] < 33 || lem->line[0] == 'L')
 		lem_error(2);
@@ -53,21 +53,19 @@ int line_validation(t_lem *lem)
 	return (0);
 }
 
-void        read_rooms(t_lem *lem)
+void		read_rooms(t_lem *lem)
 {
 	while (get_next_line(0, &lem->line) > 0)
 	{
-			ft_putstr(lem->line);		
-			ft_putstr("\n");		
-		
+			// ft_putstr(lem->line);
+			// ft_putstr("\n");
+
 		if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;
 			lem->end += !ft_strcmp(lem->line, "##end") ? 1 : 0;
-			//lem->start == 1  && lem->end == 1 && !lem->head ? lem_error(4) : 0;
+			lem->start == 1  && lem->end == 1 && !lem->sr_name  && !lem->er_name ? lem_error(4) : 0;
 			ft_strdel(&lem->line);
-			if(line_validation == 1)
-				;
 			if(lem->start > 1 || lem->end > 1)
 				lem_error(4);
 		}
@@ -76,12 +74,12 @@ void        read_rooms(t_lem *lem)
 		else if (line_validation(lem))
 			ft_strdel(&lem->line);
 		else
-		{	
+		{
 			ft_strdel(&lem->line);
 			lem_error(2);
 		}
 	}
-		
+
 }
 
 // void        read_links(char *s, t_lem *lem)
@@ -92,9 +90,9 @@ void		read_lemin(t_lem *lem)
 {
 
 	read_ants(lem);
-	if(!lem->ant_num)
+	if (!lem->ant_num)
 		lem_error(1);
 	read_rooms(lem);
-	if(lem->start != 1 || lem->end != 1)
+	if (lem->start != 1 || lem->end != 1)
 		lem_error(4);
 }

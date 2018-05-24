@@ -73,4 +73,5 @@ void			read_lemin(t_lem *lem);
 void			lem_error(char *s);
 void			parse_room(t_lem *lem);
 int				countspace(char *s);
+void			check_link(t_lem *lem);
 #endif

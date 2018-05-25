@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room.c                                             :+:      :+:    :+:   */
+/*   rooms.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 17:56:25 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/23 18:01:45 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/24 15:26:43 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ void	parse_room(t_lem *lem)
 	cleartab(lem);
 	temp1 = lem->head;
 	while (temp1)
-	{
 		if (!ft_strcmp(temp1->name, temp->name))
 			lem_error("duplicate room name");
 		if ((temp1->x == temp->x) && (temp1->y == temp->y))
 			lem_error("same room coordinate");
 		temp1 = temp1->next;
-	}
 	lem->head = temp;
 	lem->num_room++;
 }

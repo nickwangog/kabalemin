@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/23 15:54:11 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/24 21:31:06 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ struct			s_rooms
 	char		*name;
 	int			num;
 	t_lem		*ant;
-	int8_t		x;
-	int8_t		y;
-	t_rooms		**link;
+	int16_t		x;
+	int16_t		y;
 	t_rooms		*next;
 	int8_t		visited;
 	int8_t		id_ant;
@@ -63,11 +62,12 @@ struct			s_lem
 	int16_t		ant_num;
 	int8_t		start;
 	int8_t		end;
+	t_rooms		**link;		
 	char		*sr_name;
 	char		*er_name;
 	int16_t		num_room;
 	char		*line;
-	int8_t		links;
+	int16_t		links;
 };
 
 void			read_lemin(t_lem *lem);

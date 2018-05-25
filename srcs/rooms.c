@@ -26,7 +26,7 @@ void	parse_room(t_lem *lem)
 	t_rooms *temp1;
 
 	if (!(temp = (t_rooms *)malloc(sizeof(t_rooms))))
-		return ;
+		lem_error("failed to malloc");
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
 	lem->sr_name = !lem->sr_name && lem->start == 1 ? temp->name : lem->sr_name;

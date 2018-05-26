@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _LEMIN_H_
-# define _LEMIN_H_
+#ifndef LEMIN_H
+# define LEMIN_H
 
 # include <unistd.h>
 # include <dirent.h>
@@ -57,9 +57,9 @@ struct			s_rooms
 	t_path		*path;
 };
 
-struct 			s_path
+struct			s_path
 {
-	t_rooms 	*link_room;
+	t_rooms		*link_room;
 	t_path		*next;
 };
 

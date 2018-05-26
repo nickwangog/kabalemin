@@ -25,13 +25,8 @@ void	create_room(t_lem *lem)
 	t_rooms *temp;
 	t_rooms *temp1;
 
-<<<<<<< HEAD
-	if (!(temp = (t_rooms *)ft_memalloc(sizeof(t_rooms))))
-		return ;
-=======
 	if (!(temp = (t_rooms *)malloc(sizeof(t_rooms))))
 		lem_error("failed to malloc");
->>>>>>> c2b87ef2a66357bbb6149102d9ba41f979aee993
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
 	lem->sr_name = !lem->sr_name && lem->start == 1 ? temp->name : lem->sr_name;

@@ -23,13 +23,11 @@ int				check_duplicate_link(t_path *iter, t_rooms *link_to_add)
 	return (1);
 }
 
-int				link_validation(t_lem *lem)
+int				link_validation(t_lem *lem, int8_t i)
 {
 	t_rooms		*temp;
 	t_path		*temp1;
-	int8_t		i;
 
-	i = 0;
 	temp = lem->head;
 	if (!ft_strcmp(lem->tab[0], lem->tab[1]))
 		lem_error("room link to itself");
@@ -57,7 +55,7 @@ int				link_validation(t_lem *lem)
 void			create_link(t_lem *lem)
 {
 	lem->tab = ft_strsplit(lem->line, '-');
-	if (link_validation(lem))
+	if (link_validation(lem, 0))
 	{
 		//check_duplication(lem);
 		add_link(lem);

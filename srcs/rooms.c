@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 17:56:25 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/24 15:26:43 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/26 15:22:49 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	cleartab(t_lem *lem)
 	free(lem->tab);
 }
 
-void	parse_room(t_lem *lem)
+void	create_room(t_lem *lem)
 {
 	t_rooms *temp;
 	t_rooms *temp1;
 
-	if (!(temp = (t_rooms *)malloc(sizeof(t_rooms))))
+	if (!(temp = (t_rooms *)ft_memalloc(sizeof(t_rooms))))
 		return ;
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
@@ -38,11 +38,13 @@ void	parse_room(t_lem *lem)
 	cleartab(lem);
 	temp1 = lem->head;
 	while (temp1)
+	{
 		if (!ft_strcmp(temp1->name, temp->name))
 			lem_error("duplicate room name");
 		if ((temp1->x == temp->x) && (temp1->y == temp->y))
 			lem_error("same room coordinate");
 		temp1 = temp1->next;
+	}
 	lem->head = temp;
 	lem->num_room++;
 }

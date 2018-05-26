@@ -6,12 +6,12 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/24 21:31:06 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/26 15:28:01 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_H
-# define LEMIN_H
+#ifndef _LEMIN_H_
+# define _LEMIN_H_
 
 # include <unistd.h>
 # include <dirent.h>
@@ -40,6 +40,8 @@
 
 typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;
+typedef struct s_conn	t_conn;
+typedef struct s_path	t_path;
 
 struct			s_rooms
 {
@@ -51,18 +53,26 @@ struct			s_rooms
 	t_rooms		*next;
 	int8_t		visited;
 	int8_t		id_ant;
-	int8_t		room_id;
+	int16_t		room_id;
+	t_path		*path;
+};
+
+struct 			s_path
+{
+	t_rooms 	*link_room;
+	t_path		*next;
 };
 
 struct			s_lem
 {
 	t_rooms		*head;
 	t_rooms		*room;
+	t_rooms		*a;
+	t_rooms		*b;
 	char		**tab;
 	int16_t		ant_num;
 	int8_t		start;
 	int8_t		end;
-	t_rooms		**link;		
 	char		*sr_name;
 	char		*er_name;
 	int16_t		num_room;
@@ -72,7 +82,8 @@ struct			s_lem
 
 void			read_lemin(t_lem *lem);
 void			lem_error(char *s);
-void			parse_room(t_lem *lem);
+void			create_room(t_lem *lem);
 int				countspace(char *s);
-void			check_link(t_lem *lem);
+void			create_link(t_lem *lem);
+void			add_link(t_lem *lem);
 #endif

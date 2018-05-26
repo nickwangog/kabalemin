@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 00:31:54 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/23 23:45:27 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/26 15:35:28 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			line_validation(t_lem *lem)
 		if (lem->links == 1)
 			lem_error("invalid links");
 		lem->tab = ft_strsplit(lem->line, ' ');
-		parse_room(lem);
+		create_room(lem);
 		return (1);
 	}
 	else if (ft_strchr(lem->line, '-') && ft_countwords(lem->line, ' ') == 1
@@ -57,7 +57,7 @@ int			line_validation(t_lem *lem)
 	{
 		if (lem->sr_name == NULL || lem->er_name == NULL)
 			lem_error("invalid start room or end room");
-		//check_link(lem);
+		create_link(lem);
 		lem->links = 1;
 		return (1);
 	}
@@ -100,6 +100,6 @@ void		read_lemin(t_lem *lem)
 	read_rooms(lem);
 	if (lem->start != 1 || lem->end != 1)
 		lem_error("invalid start room or end room");
-	// if missing links, no valid path
-	// 	error
+	if(!lem->links)
+		lem_error("no existing links");
 }

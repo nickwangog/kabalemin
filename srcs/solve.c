@@ -12,7 +12,15 @@
 
 #include "lemin.h"
 
-void        dijikstra(t_lem *lem)
+void        dijkstra(t_lem *lem)
 {
-        //rea
+        // create a shortest path set (array), keeps 
+        // track of vertices whose minimum distance from
+        // start is calculated, empty to begin with.
+        
+        // assign all distance values as infinity, start vertex as zero
+
+        // pick next vertex with minimun distance value, include it to the
+        // shortest path set, update adjacent vertices of last picked vertex
+        // , recalculate distances and weights
 }

@@ -55,7 +55,7 @@ int			line_validation(t_lem *lem)
 	else if (ft_strchr(lem->line, '-') && ft_countwords(lem->line, ' ') == 1
 		&& countspace(lem->line) == 0)
 	{
-		if (lem->sr_name == NULL || lem->er_name == NULL)
+		if (lem->sr == NULL || lem->er == NULL)
 			lem_error("invalid start room or end room");
 		create_link(lem);
 		lem->links = 1;
@@ -74,8 +74,8 @@ void		read_rooms(t_lem *lem)
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;
 			lem->end += !ft_strcmp(lem->line, "##end") ? 1 : 0;
-			lem->start == 1 && lem->end == 1 && !lem->sr_name &&
-				!lem->er_name ? lem_error("invalid start room or end room") : 0;
+			lem->start == 1 && lem->end == 1 && !lem->sr &&
+				!lem->er ? lem_error("invalid start room or end room") : 0;
 			ft_strdel(&lem->line);
 			if (lem->start > 1 || lem->end > 1)
 				lem_error("invalid start room or end room");

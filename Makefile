@@ -8,6 +8,7 @@ SRCFILES =	main.c \
 			read.c \
 			rooms.c \
 			utilities.c \
+			solve.c \
 			links.c
 
 OBJFILES =	$(SRCFILES:.c=.o)

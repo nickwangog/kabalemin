@@ -12,29 +12,9 @@
 
 #include "lemin.h"
 
-// void        move_ants (t_lem *lem)
-// {
-
-// }
-
-void        dijkstra(t_lem *lem)
+t_rooms *minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
 {
-	// create a shortest path set (array), keeps
-	// track of vertices whose minimum distance from
-	// start is calculated, empty to begin with.
-
-	// assign all distance values as infinity, start vertex as zero
-
-	// pick next vertex with minimun distance value, include it to the
-	// shortest path set, update adjacent vertices of last picked vertex
-	// , recalculate distances and weights
-
-}
-
-int minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
-{
-	// Initialize min value
-	int min;
+	uint32_t min;
 	int i;
 
 	i = 0;
@@ -59,7 +39,31 @@ int minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
 	return (head);
 }
 
-void dijkstra(t_lem *lem, int room_id)
+void	dijk_init(t_lem *lem)
+{
+	int16_t i;
+	i = 0;
+	lem->dist = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
+	lem->shortest = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
+	while (i < lem->num_room)
+	{
+		lem->dist[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
+		lem->shortest[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
+		i++;
+	}
+	dijkstra(lem, 0);
+	i = 0;
+	while (i < lem->num_room)
+	{
+		ft_putnbr(i);
+		ft_putstr(" :");
+		ft_putnbr(lem->dist[0][i]);
+		ft_putchar('\n');
+		i++;
+	}
+}
+
+void dijkstra(t_lem *lem, int16_t room_id)
 {
 
 	t_rooms *r_check;
@@ -78,7 +82,7 @@ void dijkstra(t_lem *lem, int room_id)
 	while(i < lem->num_room)
 	{
 		r_check = minDistance(lem->dist[room_id], lem->shortest[room_id], lem->num_room, lem->head);
-		lem->shortest[r_check->room_id] = 1;
+		lem->shortest[room_id][r_check->room_id] = 1;
 		p = r_check->path;
 		while (p)
 		{
@@ -87,7 +91,7 @@ void dijkstra(t_lem *lem, int room_id)
 				lem->dist[room_id][p->link_room->room_id] = lem->dist[room_id][r_check->room_id] + 1;
 			p = p->next;
 		}
-
+		i++;
 	}
 }
 

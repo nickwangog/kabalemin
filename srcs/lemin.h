@@ -91,5 +91,6 @@ void			create_room(t_lem *lem);
 int				countspace(char *s);
 void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
-void        	dijkstra(t_lem *lem, int8_t start);
+void        	dijkstra(t_lem *lem, int16_t start);
+void			dijk_init(t_lem *lem);
 #endif

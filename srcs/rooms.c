@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 17:56:25 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/26 15:22:49 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/27 17:21:57 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,8 @@ void	create_room(t_lem *lem)
 	t_rooms *temp;
 	t_rooms *temp1;
 
-<<<<<<< HEAD
-	if (!(temp = (t_rooms *)ft_memalloc(sizeof(t_rooms))))
-		return ;
-=======
 	if (!(temp = (t_rooms *)malloc(sizeof(t_rooms))))
 		lem_error("failed to malloc");
->>>>>>> c2b87ef2a66357bbb6149102d9ba41f979aee993
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
 	lem->sr_name = !lem->sr_name && lem->start == 1 ? temp->name : lem->sr_name;
@@ -52,4 +47,5 @@ void	create_room(t_lem *lem)
 	}
 	lem->head = temp;
 	lem->num_room++;
+    lem->head->id_ant++;
 }

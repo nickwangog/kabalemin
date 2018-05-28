@@ -6,7 +6,7 @@
 /*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/26 16:58:18 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/28 00:30:25 by nwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,94 +19,75 @@
 
 void        dijkstra(t_lem *lem)
 {
-        // create a shortest path set (array), keeps 
-        // track of vertices whose minimum distance from
-        // start is calculated, empty to begin with.
-        
-        // assign all distance values as infinity, start vertex as zero
+	// create a shortest path set (array), keeps
+	// track of vertices whose minimum distance from
+	// start is calculated, empty to begin with.
 
-        // pick next vertex with minimun distance value, include it to the
-        // shortest path set, update adjacent vertices of last picked vertex
-        // , recalculate distances and weights
-        
+	// assign all distance values as infinity, start vertex as zero
+
+	// pick next vertex with minimun distance value, include it to the
+	// shortest path set, update adjacent vertices of last picked vertex
+	// , recalculate distances and weights
+
 }
 
-int minDistance(uint32_t *dist, uint32_t *shortest, int num_room)
+int minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
 {
-   // Initialize min value
-   int min;
-   int i;
+	// Initialize min value
+	int min;
+	int i;
 
-   i = 0;
-   min = INF;
-   int min_index;
-  
-   while (i < num_room)
-   {
-     if (shortest[i] == 0 && dist[i] <= min)
-     {
-        min = dist[i];
-        min_index = i;     
-     }
-     i++;
-   }
-  
-   return min_index;
+	i = 0;
+	min = INF;
+	int room_id;
+
+	while (i < num_room)
+	{
+		if (shortest[i] == 0 && dist[i] <= min)
+		{
+			min = dist[i];
+			room_id = i;
+		}
+		i++;
+	}
+	while(head)
+	{
+		if(head->room_id == room_id)
+			return(head);
+		head = head->next;
+	}
+	return (head);
 }
-  
-// Funtion that implements Dijkstra's single source shortest path algorithm
-// for a graph represented using adjacency matrix representation
+
 void dijkstra(t_lem *lem, int room_id)
-{  
-        t_rooms *linkroom;
-     int i;
-     int v;
-     int k;
-     i = 0;
+{
 
-     // Initialize all distances as INFINITE and stpSet[] as false
-     while(i < lem->num_room)
-     {
-        lem->dist[room_id][i] = INF;
-        lem->shortest[room_id][i] = 0;
-        i++;
-     }
-     // Distance of source vertex from itself is always 0
-     lem->dist[room_id][room_id] = 0;
-  
-     // Find shortest path for all vertices
-     i = 0;
-     while(i < lem->num_room)
-        {
+	t_rooms *r_check;
+	t_path	*p;
+	int i;
+	i = 0;
 
-        
-       // Pick the minimum distance vertex from the set of vertices not
-       // yet processed. u is always equal to src in first iteration.
-       int u; 
-       
-       u = minDistance(lem->dist[room_id], lem->shortest[room_id], lem->num_room);
-        find_room(lem->head, u);
-       // Mark the picked vertex as processed
-       lem->shortest[u] = 1;
-        v = 0;
-        k = 
-       // Update dist value of the adjacent vertices of the picked vertex.
-       for (int v = 0; v < V; v++)
-        while (v < )
-        {
-         // Update dist[v] only if is not in sptSet, there is an edge from 
-         // u to v, and total weight of path from src to  v through u is 
-         // smaller than current value of dist[v]
-         if (!lem->shortest[room_id][v] && 
-         && lem->dist[room_id][u] != INT_MAX 
-         && lem->dist[u] + iflinked(lem, lem->shortest[room_id], lem->dist[room_id]) < lem->dist[v])
-         lem->dist[room_id][v] = lem->dist[room_id][u] + 1;
-        v++;
-        }
-        
-     }
-  
-     // print the constructed distance array
-     printSolution(dist, V);
+	while(i < lem->num_room)
+	{
+		lem->dist[room_id][i] = INF;
+		lem->shortest[room_id][i] = 0;
+		i++;
+	}
+	lem->dist[room_id][room_id] = 0;
+	i = 0;
+	while(i < lem->num_room)
+	{
+		r_check = minDistance(lem->dist[room_id], lem->shortest[room_id], lem->num_room, lem->head);
+		lem->shortest[r_check->room_id] = 1;
+		p = r_check->path;
+		while (p)
+		{
+			if (!lem->shortest[room_id][p->link_room->room_id] && lem->dist[room_id][r_check->room_id] != INF
+					&& lem->dist[room_id][r_check->room_id] + 1 < lem->dist[room_id][p->link_room->room_id])
+				lem->dist[room_id][p->link_room->room_id] = lem->dist[room_id][r_check->room_id] + 1;
+			p = p->next;
+		}
+
+	}
 }
 

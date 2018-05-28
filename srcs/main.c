@@ -22,6 +22,8 @@ int		main(int argc, char **argv)
 		lem_error("usage: ./lem-in < (map)");
 	read_lemin(&lem);
 	dijkstra(&lem, lem.start);
+	//check if end room is INF, no valid solution
+	//valid path from start to end && no rooms without links
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);
 	ft_printf("%d\n", lem.start);

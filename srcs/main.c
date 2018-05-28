@@ -21,6 +21,7 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 		lem_error("usage: ./lem-in < (map)");
 	read_lemin(&lem);
+	dijkstra(&lem, lem.start);
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);
 	ft_printf("%d\n", lem.start);

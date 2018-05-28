@@ -37,6 +37,7 @@
 # define C_CYN		"\x1b[36m"
 # define C_WHT		"\x1b[37m"
 # define C_RESET	"\x1b[0m"
+# define INF 2147483647
 
 typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;
@@ -55,6 +56,7 @@ struct			s_rooms
 	int8_t		id_ant;
 	int16_t		room_id;
 	t_path		*path;
+	int32_t		num_links;
 };
 
 struct			s_path
@@ -73,11 +75,14 @@ struct			s_lem
 	int16_t		ant_num;
 	int8_t		start;
 	int8_t		end;
-	char		*sr_name;
-	char		*er_name;
+	t_rooms		*sr;
+
+	t_rooms		*er;
 	int16_t		num_room;
 	char		*line;
 	int16_t		links;
+	uint32_t	**dist;
+	uint32_t	**shortest; 
 };
 
 void			read_lemin(t_lem *lem);
@@ -86,5 +91,5 @@ void			create_room(t_lem *lem);
 int				countspace(char *s);
 void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
-void        	dijkstra(t_lem *lem);
+void        	dijkstra(t_lem *lem, int8_t start);
 #endif

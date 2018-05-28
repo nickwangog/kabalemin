@@ -102,5 +102,4 @@ void		read_lemin(t_lem *lem)
 		lem_error("invalid start room or end room");
 	if (!lem->links)
 		lem_error("no existing links");
-	solve(lem);
 }

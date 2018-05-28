@@ -82,7 +82,9 @@ void			add_link(t_lem *lem)
 	new_path->link_room = lem->b;
 	new_path->next = lem->a->path;
 	lem->a->path = new_path;
+	lem->a->num_links++;
 	new_path2->link_room = lem->a;
 	new_path2->next = lem->b->path;
 	lem->b->path = new_path2;
+	lem->b->num_links++;
 }

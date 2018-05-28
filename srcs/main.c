@@ -21,11 +21,12 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 		lem_error("usage: ./lem-in < (map)");
 	read_lemin(&lem);
+	dijk_init(&lem);
+	//check if end room is INF, no valid solution
+	//valid path from start to end && no rooms without links
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);
 	ft_printf("%d\n", lem.start);
 	ft_printf("%d\n", lem.end);
-	ft_printf("%s\n", lem.sr_name);
-	ft_printf("%s\n", lem.er_name);
 	return (0);
 }

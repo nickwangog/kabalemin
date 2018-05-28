@@ -23,7 +23,7 @@ int				check_duplicate_link(t_path *iter, t_rooms *link_to_add)
 	return (1);
 }
 
-int				link_validation(t_lem *lem, int8_t i)
+int				link_validation(t_lem *lem)
 {
 	t_rooms		*temp;
 	t_path		*temp1;
@@ -55,7 +55,7 @@ int				link_validation(t_lem *lem, int8_t i)
 void			create_link(t_lem *lem)
 {
 	lem->tab = ft_strsplit(lem->line, '-');
-	if (link_validation(lem, 0))
+	if (link_validation(lem))
 	{
 		//check_duplication(lem);
 		add_link(lem);
@@ -82,7 +82,9 @@ void			add_link(t_lem *lem)
 	new_path->link_room = lem->b;
 	new_path->next = lem->a->path;
 	lem->a->path = new_path;
+	lem->a->num_links++;
 	new_path2->link_room = lem->a;
 	new_path2->next = lem->b->path;
 	lem->b->path = new_path2;
+	lem->b->num_links++;
 }

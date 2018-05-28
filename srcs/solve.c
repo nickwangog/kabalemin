@@ -51,6 +51,7 @@ void	dijk_init(t_lem *lem)
 		lem->shortest[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
 		i++;
 	}
+	//loop
 	dijkstra(lem, 0);
 	i = 0;
 	while (i < lem->num_room)

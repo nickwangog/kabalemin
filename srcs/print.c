@@ -28,7 +28,7 @@ void    print_map(t_lem *lem)
     //only if valid??
 }
 
-// void    print_soulution(t_lem *lem)
+// void    print_solution(t_lem *lem)
 // {
 
 // }

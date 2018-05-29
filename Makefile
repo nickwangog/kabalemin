@@ -9,7 +9,8 @@ SRCFILES =	main.c \
 			rooms.c \
 			utilities.c \
 			solve.c \
-			links.c
+			links.c \
+			print.c
 
 OBJFILES =	$(SRCFILES:.c=.o)
 SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))

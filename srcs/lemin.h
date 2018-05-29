@@ -76,7 +76,6 @@ struct			s_lem
 	int8_t		start;
 	int8_t		end;
 	t_rooms		*sr;
-
 	t_rooms		*er;
 	int16_t		num_room;
 	char		*line;
@@ -93,4 +92,5 @@ void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
 void        	dijkstra(t_lem *lem, int16_t start);
 void			dijk_init(t_lem *lem);
+void			print_map(t_lem *lem);
 #endif

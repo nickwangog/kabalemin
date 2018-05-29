@@ -13,7 +13,7 @@
 #include "lemin.h"
 
 void		read_ants(t_lem *lem)
-{
+{	
 	while (get_next_line(0, &lem->line) > 0)
 	{
 		if (!ft_strcmp(lem->line, "##end") || !ft_strcmp(lem->line, "##start"))
@@ -68,8 +68,8 @@ void		read_rooms(t_lem *lem)
 {
 	while (get_next_line(0, &lem->line) > 0)
 	{
-		// ft_putstr(lem->line);
-		// ft_putstr("\n");
+		ft_putstr(lem->line);
+		ft_putstr("\n");
 		if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;

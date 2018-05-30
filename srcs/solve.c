@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/29 19:05:33 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/29 19:44:28 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void dijkstra(t_lem *lem, int16_t room_id)
 	}
 }
 
-void move_ants(t_lem *lem, t_rooms *head)
+/* void move_ants(t_lem *lem)
 {	
 	int min;
 	//t_rooms *temp;
@@ -117,5 +117,8 @@ void move_ants(t_lem *lem, t_rooms *head)
 			else
 				min = lem->dist[lem->sr->path->link_room->->next->room_id][lem->er->room_id];
 		//track room ids and move ants along the way
+
+		t_romm * 
+		
 	}
-}
+} */

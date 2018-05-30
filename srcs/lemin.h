@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/29 18:26:29 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/30 01:10:45 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ struct			s_lem
 	uint32_t	**shortest;
 	char		buf[30000];
 };
+
+/* typedef struct t_queue
+{
+	t_rooms *
+} */
 
 void			read_lemin(t_lem *lem);
 void			lem_error(char *s);

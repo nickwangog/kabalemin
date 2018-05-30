@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 19:20:03 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/26 15:27:51 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/29 18:02:49 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,20 @@ void			add_link(t_lem *lem)
 	new_path2->next = lem->b->path;
 	lem->b->path = new_path2;
 	lem->b->num_links++;
+}
+
+int is_no_rlinks(t_rooms *head, char *room_name)
+{
+	t_rooms *temp;
+	temp = head;
+	while(temp)
+	{
+		if(temp->num_links == 0)
+		{
+			ft_strcpy(room_name, temp->name);
+			return(1);
+		}
+			temp = temp->next;
+	}
+	return(0);
 }

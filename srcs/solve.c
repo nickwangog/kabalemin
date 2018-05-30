@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/28 00:30:25 by nwang            ###   ########.fr       */
+/*   Updated: 2018/05/29 19:05:33 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,21 @@ void	dijk_init(t_lem *lem)
 		i++;
 	}
 	//loop
-	dijkstra(lem, 0);
 	i = 0;
-	while (i < lem->num_room)
+	while(i < lem->num_room)
+		dijkstra(lem, i++);
+	int j = -1;
+	while(++j < lem->num_room)
 	{
-		ft_putnbr(i);
-		ft_putstr(" :");
-		ft_putnbr(lem->dist[0][i]);
-		ft_putchar('\n');
-		i++;
+		i = 0;
+		while (i < lem->num_room)
+		{
+			ft_printf("[%d][%d]", j, i);
+			ft_putstr(" dist :");
+			ft_putnbr(lem->dist[j][i]);
+			ft_putchar('\n');
+			i++;
+		}
 	}
 }
 
@@ -96,3 +102,20 @@ void dijkstra(t_lem *lem, int16_t room_id)
 	}
 }
 
+void move_ants(t_lem *lem, t_rooms *head)
+{	
+	int min;
+	//t_rooms *temp;
+	
+	//temp = head;
+	min = INF;
+	if(lem->ant_num <= lem->dist[lem->sr->room_id][lem->er->room_id])
+	{
+		while ()
+			if(lem->dist[lem->sr->path->link_room->room_id][lem->er->room_id] < lem->dist[lem->sr->path->link_room->next->room_id][lem->er->room_id])
+				min = lem->dist[lem->sr->path->link_room->room_id][lem->er->room_id];
+			else
+				min = lem->dist[lem->sr->path->link_room->->next->room_id][lem->er->room_id];
+		//track room ids and move ants along the way
+	}
+}

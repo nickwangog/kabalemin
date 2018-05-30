@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/26 15:28:01 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/29 18:26:29 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,6 @@ void			add_link(t_lem *lem);
 void        	dijkstra(t_lem *lem, int16_t start);
 void			dijk_init(t_lem *lem);
 void			print_map(t_lem *lem);
+int 			is_no_rlinks(t_rooms *head, char *room_name);
+int				is_valid_start_end(t_lem *lem);
 #endif

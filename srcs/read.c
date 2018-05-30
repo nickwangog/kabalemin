@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 00:31:54 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/26 15:35:28 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/29 18:04:01 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void		read_rooms(t_lem *lem)
 {
 	while (get_next_line(0, &lem->line) > 0)
 	{
-		ft_putstr(lem->line);
-		ft_putstr("\n");
+		// ft_putstr(lem->line);
+		// ft_putstr("\n");
 		if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;
@@ -94,6 +94,8 @@ void		read_rooms(t_lem *lem)
 
 void		read_lemin(t_lem *lem)
 {
+	char room_name[50];
+
 	read_ants(lem);
 	if (!lem->ant_num)
 		lem_error("invalid ants");
@@ -102,4 +104,10 @@ void		read_lemin(t_lem *lem)
 		lem_error("invalid start room or end room");
 	if (!lem->links)
 		lem_error("no existing links");
+	if(is_no_rlinks(lem->head, room_name))
+	{
+		ft_printf("Error: the room %s has no link.\n", room_name);
+		exit(1);
+	}
+		
 }

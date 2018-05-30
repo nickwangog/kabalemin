@@ -66,10 +66,12 @@ int			line_validation(t_lem *lem)
 
 void		read_rooms(t_lem *lem)
 {
+	ft_strcpy(lem->buf, ft_itoa(lem->ant_num));
+	ft_strcat(lem->buf, "\n");
 	while (get_next_line(0, &lem->line) > 0)
 	{
-		// ft_putstr(lem->line);
-		// ft_putstr("\n");
+		ft_strcat(lem->buf, lem->line);
+		ft_strcat(lem->buf, "\n");
 		if (!ft_strcmp(lem->line, "##start") || !ft_strcmp(lem->line, "##end"))
 		{
 			lem->start += !ft_strcmp(lem->line, "##start") ? 1 : 0;

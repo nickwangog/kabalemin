@@ -27,7 +27,7 @@ int		main(int argc, char **argv)
 
 	//check if end room is INF, no valid solution
 	//valid path from start to end && no rooms without links
-	print_map(&lem);
+	print_lemin(&lem);
 	// print_solution(&lem);
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);

@@ -81,7 +81,8 @@ struct			s_lem
 	char		*line;
 	int16_t		links;
 	uint32_t	**dist;
-	uint32_t	**shortest; 
+	uint32_t	**shortest;
+	char		buf[30000];
 };
 
 void			read_lemin(t_lem *lem);
@@ -92,7 +93,7 @@ void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
 void        	dijkstra(t_lem *lem, int16_t start);
 void			dijk_init(t_lem *lem);
-void			print_map(t_lem *lem);
+void			print_lemin(t_lem *lem);
 int 			is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 #endif

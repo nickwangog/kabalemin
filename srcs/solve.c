@@ -64,7 +64,6 @@ void	dijk_init(t_lem *lem)
 		lem->shortest[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
 		i++;
 	}
-	//loop
 	tmp = lem->head;
 	while(tmp)
 	{
@@ -80,19 +79,19 @@ void	dijk_init(t_lem *lem)
 		printf("-----------------------------------------------------\n\n\n");
 		tmp = tmp->next;
 	}
-	int j = -1;
-	while(++j < lem->num_room)
-	{
-		i = 0;
-		while (i < lem->num_room)
-		{
-			// ft_printf("[%d][%d]", j, i);
-			// ft_putstr(" dist :");
-			// ft_putnbr(lem->dist[j][i]);
-			// ft_putchar('\n');
-			i++;
-		}
-	}
+	// int j = -1;
+	// while(++j < lem->num_room)
+	// {
+	// 	i = 0;
+	// 	while (i < lem->num_room)
+	// 	{
+	// 		// ft_printf("[%d][%d]", j, i);
+	// 		// ft_putstr(" dist :");
+	// 		// ft_putnbr(lem->dist[j][i]);
+	// 		// ft_putchar('\n');
+	// 		i++;
+	// 	}
+	// }
 }
 
 void dijkstra(t_lem *lem, int16_t room_id)
@@ -126,8 +125,3 @@ void dijkstra(t_lem *lem, int16_t room_id)
 		i++;
 	}
 }
-
-// void move_ants(t_lem *lem)
-// {
-	
-// } */

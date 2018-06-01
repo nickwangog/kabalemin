@@ -20,15 +20,7 @@
 # include <time.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/xattr.h>
-# include <pwd.h>
-# include <grp.h>
-# include <uuid/uuid.h>
-# include <errno.h>
 # include "../libft/includes/ft_printf.h"
-# define NUM(c) ((c) - '0')
 # define C_RED		"\x1b[31m"
 # define C_GRN		"\x1b[32m"
 # define C_YEL		"\x1b[33m"
@@ -116,4 +108,5 @@ void			print_lemin(t_lem *lem);
 int 			is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);
+void			move_ants(t_lem *lem);
 #endif

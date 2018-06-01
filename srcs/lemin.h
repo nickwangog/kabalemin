@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/30 01:10:45 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/31 18:01:52 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;
 typedef struct s_conn	t_conn;
 typedef struct s_path	t_path;
+typedef struct s_node	t_node;
+typedef struct s_queue	t_queue;
 
 struct			s_rooms
 {
@@ -64,6 +66,18 @@ struct			s_path
 	t_rooms		*link_room;
 	t_path		*next;
 };
+
+struct			s_node
+{
+	t_rooms		*room_data;
+	t_node		*next;
+};
+
+typedef struct s_queue
+{
+	t_node		*front;
+	t_node		*rear;
+}				t_queue;
 
 struct			s_lem
 {
@@ -87,7 +101,7 @@ struct			s_lem
 
 /* typedef struct t_queue
 {
-	t_rooms *
+	t_rooms *start;
 } */
 
 void			read_lemin(t_lem *lem);

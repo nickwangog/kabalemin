@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/29 19:44:28 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/31 18:26:52 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_rooms *minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *
 void	dijk_init(t_lem *lem)
 {
 	int16_t i;
+	t_rooms *tmp;
 	i = 0;
 	lem->dist = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
 	lem->shortest = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
@@ -52,9 +53,13 @@ void	dijk_init(t_lem *lem)
 		i++;
 	}
 	//loop
-	i = 0;
-	while(i < lem->num_room)
-		dijkstra(lem, i++);
+	tmp = lem->head;
+	while(tmp)
+	{
+		dijkstra(lem, tmp->room_id);
+		sort_path(tmp);
+		tmp = tmp->next;
+	}
 	int j = -1;
 	while(++j < lem->num_room)
 	{
@@ -102,23 +107,7 @@ void dijkstra(t_lem *lem, int16_t room_id)
 	}
 }
 
-/* void move_ants(t_lem *lem)
-{	
-	int min;
-	//t_rooms *temp;
+void move_ants(t_lem *lem)
+{
 	
-	//temp = head;
-	min = INF;
-	if(lem->ant_num <= lem->dist[lem->sr->room_id][lem->er->room_id])
-	{
-		while ()
-			if(lem->dist[lem->sr->path->link_room->room_id][lem->er->room_id] < lem->dist[lem->sr->path->link_room->next->room_id][lem->er->room_id])
-				min = lem->dist[lem->sr->path->link_room->room_id][lem->er->room_id];
-			else
-				min = lem->dist[lem->sr->path->link_room->->next->room_id][lem->er->room_id];
-		//track room ids and move ants along the way
-
-		t_romm * 
-		
-	}
 } */

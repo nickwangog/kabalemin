@@ -10,7 +10,8 @@ SRCFILES =	main.c \
 			utilities.c \
 			solve.c \
 			links.c \
-			print.c
+			print.c \
+			sort.c
 
 OBJFILES =	$(SRCFILES:.c=.o)
 SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))

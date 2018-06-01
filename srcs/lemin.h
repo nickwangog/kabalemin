@@ -115,4 +115,5 @@ void			dijk_init(t_lem *lem);
 void			print_lemin(t_lem *lem);
 int 			is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
+void			sort_path(t_path **tmp, t_lem *lem);
 #endif

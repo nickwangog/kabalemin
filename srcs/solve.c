@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-t_rooms *minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
+t_rooms *room_to_check(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
 {
 	uint32_t min;
 	int i;
@@ -39,6 +39,18 @@ t_rooms *minDistance(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *
 	return (head);
 }
 
+void	print_connections(t_path *p, t_lem *lem)
+{
+	if (!p)
+		return ;
+	printf("|| ---------------\n");
+	while (p)
+	{
+		printf("Room name: %s, distance to end: %d\n", p->link_room->name, lem->dist[p->link_room->room_id][lem->er->room_id]);
+		p = p->next;
+	}
+}
+
 void	dijk_init(t_lem *lem)
 {
 	int16_t i;
@@ -57,7 +69,15 @@ void	dijk_init(t_lem *lem)
 	while(tmp)
 	{
 		dijkstra(lem, tmp->room_id);
-		sort_path(tmp);
+		tmp = tmp->next;
+	}
+	tmp = lem->head;
+	while(tmp)
+	{
+		print_connections(tmp->path, lem);
+		sort_path(&tmp->path, lem);
+		print_connections(tmp->path, lem);
+		printf("-----------------------------------------------------\n\n\n");
 		tmp = tmp->next;
 	}
 	int j = -1;
@@ -66,10 +86,10 @@ void	dijk_init(t_lem *lem)
 		i = 0;
 		while (i < lem->num_room)
 		{
-			ft_printf("[%d][%d]", j, i);
-			ft_putstr(" dist :");
-			ft_putnbr(lem->dist[j][i]);
-			ft_putchar('\n');
+			// ft_printf("[%d][%d]", j, i);
+			// ft_putstr(" dist :");
+			// ft_putnbr(lem->dist[j][i]);
+			// ft_putchar('\n');
 			i++;
 		}
 	}
@@ -93,7 +113,7 @@ void dijkstra(t_lem *lem, int16_t room_id)
 	i = 0;
 	while(i < lem->num_room)
 	{
-		r_check = minDistance(lem->dist[room_id], lem->shortest[room_id], lem->num_room, lem->head);
+		r_check = room_to_check(lem->dist[room_id], lem->shortest[room_id], lem->num_room, lem->head);
 		lem->shortest[room_id][r_check->room_id] = 1;
 		p = r_check->path;
 		while (p)
@@ -107,7 +127,7 @@ void dijkstra(t_lem *lem, int16_t room_id)
 	}
 }
 
-void move_ants(t_lem *lem)
-{
+// void move_ants(t_lem *lem)
+// {
 	
-} */
+// } */

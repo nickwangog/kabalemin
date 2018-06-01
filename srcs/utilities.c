@@ -46,9 +46,9 @@ int is_empty(t_queue *q)
 	return(q->rear == NULL);
 }
 
-t_queue *init(t_queue *q)
-{
-	q = (t_queue *)malloc(sizeof(t_queue));
-	q->front = NULL;
-	q->front = NULL;
-}
+// t_queue *init(t_queue *q)
+// {
+// 	q = (t_queue *)malloc(sizeof(t_queue));
+// 	q->front = NULL;
+// 	q->front = NULL;
+// }

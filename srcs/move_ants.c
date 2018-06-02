@@ -84,7 +84,8 @@ void path_decision(t_lem *lem)
 
 // int16_t sum_ant(t_lem *lem)
 // {
-// 	int16_t sum_lcm;
+// 	int16_t sum_lcm;i
+
 
 // 	sum_lcm = 0;
 // 	if(sum_lcm > lem->ant_num)

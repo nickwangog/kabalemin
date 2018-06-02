@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:26:35 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/01 17:16:38 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/01 19:28:14 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,18 @@ unsigned int    lcm(unsigned int a, unsigned int b)
 	return((a * b) / hcf(a,b));
 }
 
-
+void		count_sr_conn(t_lem *lem)
+{
+	t_path *p;	
+	
+	
+	p = lem->sr->path;		
+	while(p)
+	{
+		lem->count++;
+		p = p->next;
+	}
+}
 
 // int is_empty(t_queue *q)
 // {

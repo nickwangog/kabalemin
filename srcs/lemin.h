@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/01 17:17:13 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/01 19:59:04 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ struct			s_lem
 	t_rooms		*sr;
 	t_rooms		*er;
 	t_ants		*tab_ants;
+	int16_t		count;
 	int16_t		rem_ants;
 	int16_t		ant_num;
 	int8_t		start;
@@ -82,6 +83,7 @@ struct			s_lem
 	int16_t		links;
 	uint32_t	**dist;
 	uint32_t	**shortest;
+	int16_t		sum_lcm;
 	char		buf[30000];
 };
 
@@ -104,4 +106,5 @@ int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);
 void			move_ants(t_lem *lem);
 unsigned int    lcm(unsigned int a, unsigned int b);
+void			count_sr_conn(t_lem *lem);
 #endif

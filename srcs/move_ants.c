@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:17:17 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/01 18:21:40 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/01 20:19:08 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,42 +65,62 @@ void	ant_init(t_lem	*lem)
 	}
 }
 
-int8_t path_decision(t_lem *lem, int16_t i)
+void path_decision(t_lem *lem)
 {
-	int16_t sum_lcm;
+	int16_t temp;
 	int16_t j;
+	temp = 1;
 	t_path *p;	
 	
-	j = i;
-	sum_lcm = 1;
-	p = lem->sr->path;	
-	while(i--)
+	p = lem->sr->path;
+	j = lem->count;		
+	while(j--)
 	{
-		sum_lcm = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], sum_lcm);
+		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
 		p = p->next;
 	}
-	sum_lcm = sum_lcm / j;
-	return(sum_lcm);
+	lem->sum_lcm = temp;
+}
+
+// int16_t sum_ant(t_lem *lem)
+// {
+// 	int16_t sum_lcm;
+
+// 	sum_lcm = 0;
+// 	if(sum_lcm > lem->ant_num)
+// 	{
+// 		sum_lcm = path_decision(lem);
+// 	}
+// 	return(sum_lcm);
+	
+}
+
+void	best_lcm(t_lem *lem)
+{
+	while (lem->sum_lcm > lem->ant_num)
+	{
+		lem->count--;
+		path_decision(lem);
+	}
 }
 
 void move_ants(t_lem	*lem)
 {
 	int16_t i;
-	int16_t sum_lcm;
+	int16_t temp;
+	t_path	*p;	
+	
 	i = 0;
-	
-	t_path *p;
-	p = lem->sr->path;
-	while(p)
-	{
-		i++;
-		p = p->next;
-	}
-	
-	while(path_decision(lem , i) > lem->ant_num)
-		i--;
+	p = lem->sr->path;	
+	count_sr_conn(lem);
+	path_decision(lem);
+	ant_loop(lem);
 	
 	lem->rem_ants = 0;
+		else
+			move ants to the number of paths count
+			subtract from ant total
+			track and store ant movements to print
 	
 	while(lem->rem_ants < lem->ant_num)
 	{

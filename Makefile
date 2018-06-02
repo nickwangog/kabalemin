@@ -11,7 +11,8 @@ SRCFILES =	main.c \
 			solve.c \
 			links.c \
 			print.c \
-			sort.c
+			sort.c \
+			move_ants.c
 
 OBJFILES =	$(SRCFILES:.c=.o)
 SRCS        = $(addprefix $(SRCDIR), $(SRCFILES))

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/31 18:01:52 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/01 17:17:13 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,20 @@ typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;
 typedef struct s_conn	t_conn;
 typedef struct s_path	t_path;
-typedef struct s_node	t_node;
-typedef struct s_queue	t_queue;
+typedef struct s_ants	t_ants;
 
 struct			s_rooms
 {
-	char		*name;
-	int			num;
-	t_lem		*ant;
+	char		*name;                                                                                                                              
+	//int			num;
 	int16_t		x;
 	int16_t		y;
 	t_rooms		*next;
 	int8_t		visited;
-	int8_t		id_ant;
 	int16_t		room_id;
 	t_path		*path;
 	int32_t		num_links;
+	int8_t		has_ant;
 };
 
 struct			s_path
@@ -59,17 +57,11 @@ struct			s_path
 	t_path		*next;
 };
 
-struct			s_node
+struct			s_ants
 {
-	t_rooms		*room_data;
-	t_node		*next;
+	int8_t		ant_id;
+	t_rooms		*ant_room;
 };
-
-typedef struct s_queue
-{
-	t_node		*front;
-	t_node		*rear;
-}				t_queue;
 
 struct			s_lem
 {
@@ -78,11 +70,13 @@ struct			s_lem
 	t_rooms		*a;
 	t_rooms		*b;
 	char		**tab;
+	t_rooms		*sr;
+	t_rooms		*er;
+	t_ants		*tab_ants;
+	int16_t		rem_ants;
 	int16_t		ant_num;
 	int8_t		start;
 	int8_t		end;
-	t_rooms		*sr;
-	t_rooms		*er;
 	int16_t		num_room;
 	char		*line;
 	int16_t		links;
@@ -109,4 +103,5 @@ int 			is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);
 void			move_ants(t_lem *lem);
+unsigned int    lcm(unsigned int a, unsigned int b);
 #endif

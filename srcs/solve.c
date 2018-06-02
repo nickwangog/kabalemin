@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/31 18:26:52 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/31 23:59:32 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	dijk_init(t_lem *lem)
 	tmp = lem->head;
 	while(tmp)
 	{
-		print_connections(tmp->path, lem);
+		// print_connections(tmp->path, lem);
 		sort_path(&tmp->path, lem);
-		print_connections(tmp->path, lem);
-		printf("-----------------------------------------------------\n\n\n");
+		// print_connections(tmp->path, lem);
+		// printf("-----------------------------------------------------\n\n\n");
 		tmp = tmp->next;
 	}
 	// int j = -1;

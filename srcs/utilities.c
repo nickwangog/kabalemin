@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:26:35 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/31 18:06:58 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/01 17:16:38 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,24 @@ int		is_valid_start_end(t_lem *lem)
 	return (0);	
 }
 
-int is_empty(t_queue *q)
+unsigned int  hcf(unsigned int a, unsigned int b)
 {
-	return(q->rear == NULL);
+	if(b == 0)
+		return(a);
+	return(hcf(b, (a%b)));
 }
+
+unsigned int    lcm(unsigned int a, unsigned int b)
+{
+	return((a * b) / hcf(a,b));
+}
+
+
+
+// int is_empty(t_queue *q)
+// {
+// 	return(q->rear == NULL);
+// }
 
 // t_queue *init(t_queue *q)
 // {

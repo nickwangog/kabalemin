@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:32:22 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/29 18:25:53 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/05/31 23:56:44 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		main(int argc, char **argv)
 		lem_error("no valid path between start and end rooms");
 	//check if end room is INF, no valid solution
 	//valid path from start to end && no rooms without links
-	print_lemin(&lem);
+	move_ants(&lem);
+	// print_lemin(&lem);
 	// print_solution(&lem);
 	ft_printf("%d\n", lem.ant_num);
 	ft_printf("%d\n", lem.num_room);

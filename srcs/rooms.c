@@ -29,7 +29,6 @@ void	create_room(t_lem *lem)
 		lem_error("failed to malloc");
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
-	
 	lem->sr = !lem->sr && lem->start == 1 ? temp : lem->sr;
 	lem->er = !lem->er && lem->end == 1 ? temp : lem->er;
 	ft_linedigit(lem->tab[1]) ? temp->x =
@@ -48,5 +47,5 @@ void	create_room(t_lem *lem)
 	}
 	lem->head = temp;
 	lem->num_room++;
-    lem->head->room_id = lem->num_room - 1;
+	lem->head->room_id = lem->num_room - 1;
 }

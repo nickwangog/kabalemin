@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 19:20:51 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/02 18:46:10 by nwang            ###   ########.fr       */
+/*   Updated: 2018/06/02 19:15:29 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			sort_path(t_path **tmp, t_lem *lem)
 	t_path		*a;
 	t_path		*b;
 
-	head = tmp;
+	head = *tmp;
 	if ((head == NULL) || (head->next == NULL))
 	{
 		return ;

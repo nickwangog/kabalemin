@@ -6,62 +6,34 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:17:17 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/01 20:19:08 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/02 17:54:16 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void    move_ants(t_lem *lem)
-{
-	t_rooms *p;
-	t_ant   ant[num_of_ants];
-	//init_ant initialise all the ant to the start room
-   // int16_t i;
-
-	p = NULL;
-	//move ant to shortest distance room in sorted path, check if room has an ant inside of it.
-	//if number of ants is larger than the dist of [room][end], use the next path as well.
-	//track and print movement of ants.
-	lem->sr->ants = lem->ant_num;
-	p = lem->sr->path->link_room;
-	if (!p)
-		return ;
-	//printf("pname: %s", p->link_room);
-
-	while(lem->sr->ants)
-	{
-		p = lem->sr->path->link_room;
-								 p->ants == 0 ? p->ants = 1 && lem->sr->ants-- : 0;
-		while(p && p->next)
-		{
-			p->ants == 1 && p->path == 0 ? (( p->ants = 0 ) && (p->next->ants = 1)) : 0;
-			printf("Rooms connected to start: %s, num ant: %d.\n", p->name, p->ants);
-			p = p->next;
-		}
-	}
-
-
-	/* while(p )
-	{
-
-		printf("Rooms connected to start: %s , dist to end: %d, num ant: %d.\n", p->link_room->name, lem->dist[p->link_room->room_id][lem->er->room_id], p->link_room->ants);
-		p = p->next;
-	} */
-}
-
-void	ant_init(t_lem	*lem)
+void	ant_init(t_ants *ants, int16_t n, t_rooms *sr)
 {
 	int16_t i;
 
-	if(!(lem->tab_ants = (t_ants *)malloc(sizeof(t_ants) * lem->ant_num)))
-		lem_error("ant malloc failled");
-	
 	i = -1;
-	while(++i < lem->ant_num)
+	while(++i < n)
 	{
-		lem->tab_ants[i].ant_id = i + 1;
-		lem->tab_ants[i].ant_room = lem->sr;
+		ants[i].ant_id = i;
+		ants[i].ant_room = sr;
+	}
+}
+
+void		count_sr_conn(t_lem *lem)
+{
+	t_path *p;	
+	
+	
+	p = lem->sr->path;		
+	while(p)
+	{
+		lem->count++;
+		p = p->next;
 	}
 }
 
@@ -82,46 +54,86 @@ void path_decision(t_lem *lem)
 	lem->sum_lcm = temp;
 }
 
-// int16_t sum_ant(t_lem *lem)
-// {
-// 	int16_t sum_lcm;i
-
-
-// 	sum_lcm = 0;
-// 	if(sum_lcm > lem->ant_num)
-// 	{
-// 		sum_lcm = path_decision(lem);
-// 	}
-// 	return(sum_lcm);
-	
-}
-
 void	best_lcm(t_lem *lem)
 {
 	while (lem->sum_lcm > lem->ant_num)
 	{
-		lem->count--;
+		lem->count = lem->count - 1;
 		path_decision(lem);
 	}
+	printf("lem->count value = %d | lcm =  %d\n", lem->count, lem->sum_lcm);
 }
 
-void move_ants(t_lem	*lem)
+/* void move_ants(t_lem	*lem)
+{
+	t_ants *ants;
+	ants = lem->tab_ants;
+	int i;
+	i = 0;
+	while(i < lem->count)
+	{
+		if(ants[i].ant_room-
+	}
+	//start from ant_id 1, check if next room is unoccupied
+	//change room_id associated with ant
+	// subtract from lem->board_ants
+	//iterate through ants to next ant id
+} */
+
+void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
+{
+	// set the ants last room's has_ant to 0
+	// set the cur ant's current room to the * passed through here (r)
+	// set the ant's new current room has_ant to 1
+	// print the movement of the ant
+	a->ant_room->has_ant = 0;
+	a->ant_room = r;
+	a->ant_room->has_ant = 1;
+	lem->board_ants -= r == lem->er ? 1 : 0;
+	ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
+	//print the space;
+}
+
+void lem_ants(t_lem	*lem)
 {
 	int16_t i;
-	int16_t temp;
-	t_path	*p;	
+	int16_t j;
+	//int16_t temp;
+	t_paths	*p;	
+	t_ants ants[lem->ant_num];
 	
 	i = 0;
-	p = lem->sr->path;	
+	ant_init(ants, lem->ant_num, lem->sr);
 	count_sr_conn(lem);
 	path_decision(lem);
-	ant_loop(lem);
-	
-	lem->rem_ants = 0;
-		else
+	lem->board_ants = lem->ant_num;
+	while(lem->board_ants)
+	{
+		if(lem->sum_lcm < lem->ant_num)
+		{
+			i = -1;
+			while(++i < lem->ant_num)
+			{
+				if(ants[i].ant_room->path->link_room == lem->er)
+				{
+					move_ant(lem, &ants[i], lem->er);
+					lem->board_ants--;
+				}
+				else if (ants[i].ant_room != lem->er)
+				{
+
+				}
+			}
+				/* move_ants(t_lem *lem);
 			move ants to the number of paths count
 			subtract from ant total
-			track and store ant movements to print
+			track and store ant movements to print */
+		}
+		else
+		{
+			best_lcm(lem);
+		}
+	}
 	
 	while(lem->rem_ants < lem->ant_num)
 	{

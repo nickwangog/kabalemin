@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:17:17 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/02 17:54:16 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/02 18:42:43 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,16 @@ void	ant_init(t_ants *ants, int16_t n, t_rooms *sr)
 	}
 }
 
-void		count_sr_conn(t_lem *lem)
-{
-	t_path *p;	
-	
-	
-	p = lem->sr->path;		
-	while(p)
-	{
-		lem->count++;
-		p = p->next;
-	}
-}
 
 void path_decision(t_lem *lem)
 {
 	int16_t temp;
-	int16_t j;
 	temp = 1;
 	t_path *p;	
 	
 	p = lem->sr->path;
-	j = lem->count;		
-	while(j--)
+	lem->count = lem->sr->num_links;		
+	while(lem->count--)
 	{
 		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
 		p = p->next;
@@ -80,7 +67,7 @@ void	best_lcm(t_lem *lem)
 	//iterate through ants to next ant id
 } */
 
-void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
+void	move_ant(t_ants *a, t_rooms *r)
 {
 	// set the ants last room's has_ant to 0
 	// set the cur ant's current room to the * passed through here (r)
@@ -94,6 +81,12 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	//print the space;
 }
 
+void move_ant_from_start(t-lem *lem, t_path *p, t_ant *a)
+{
+	int i;
+	move_ant(a, );
+	lem->start_ants--;
+}
 void lem_ants(t_lem	*lem)
 {
 	int16_t i;
@@ -104,9 +97,9 @@ void lem_ants(t_lem	*lem)
 	
 	i = 0;
 	ant_init(ants, lem->ant_num, lem->sr);
-	count_sr_conn(lem);
 	path_decision(lem);
 	lem->board_ants = lem->ant_num;
+	lem->start_ants = lem->ant_num;
 	while(lem->board_ants)
 	{
 		if(lem->sum_lcm < lem->ant_num)
@@ -115,15 +108,18 @@ void lem_ants(t_lem	*lem)
 			while(++i < lem->ant_num)
 			{
 				if(ants[i].ant_room->path->link_room == lem->er)
-				{
 					move_ant(lem, &ants[i], lem->er);
-					lem->board_ants--;
+				else if (ants[i].ant_room == lem->sr)
+				{
+					p = p->sr->path;
+
+					move_ant_from_start(lem,  &ants[i]
+
 				}
-				else if (ants[i].ant_room != lem->er)
+				else
 				{
 
 				}
-			}
 				/* move_ants(t_lem *lem);
 			move ants to the number of paths count
 			subtract from ant total

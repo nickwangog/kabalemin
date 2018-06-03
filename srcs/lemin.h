@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/01 19:59:04 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/02 19:05:04 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ struct			s_lem
 	int16_t		count;
 	int16_t		rem_ants;
 	int16_t		ant_num;
+	int16_t		start_ants;
+	int16_t		board_ants;
 	int8_t		start;
 	int8_t		end;
 	int16_t		num_room;
@@ -94,7 +96,6 @@ void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
 void			dijkstra(t_lem *lem, int16_t start);
 void			dijk_init(t_lem *lem);
-void			print_lemin(t_lem *lem);
 int				is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);

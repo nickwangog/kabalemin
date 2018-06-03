@@ -10,7 +10,6 @@ SRCFILES =	main.c \
 			utilities.c \
 			solve.c \
 			links.c \
-			print.c \
 			sort.c \
 			move_ants.c
 

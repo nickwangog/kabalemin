@@ -6,7 +6,7 @@
 /*   By: nwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 23:23:57 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/28 23:23:58 by nwang            ###   ########.fr       */
+/*   Updated: 2018/06/02 18:01:19 by nwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void    print_lemin(t_lem *lem)
 {
-    ft_putstr(lem->buf);
-    //solution
+	ft_putstr(lem->buf);
 }

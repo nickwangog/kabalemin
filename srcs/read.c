@@ -13,7 +13,7 @@
 #include "lemin.h"
 
 void		read_ants(t_lem *lem)
-{	
+{
 	while (get_next_line(0, &lem->line) > 0)
 	{
 		if (!ft_strcmp(lem->line, "##end") || !ft_strcmp(lem->line, "##start"))
@@ -106,10 +106,9 @@ void		read_lemin(t_lem *lem)
 		lem_error("invalid start room or end room");
 	if (!lem->links)
 		lem_error("no existing links");
-	if(is_no_rlinks(lem->head, room_name))
+	if (is_no_rlinks(lem->head, room_name))
 	{
 		ft_printf("Error: the room %s has no link.\n", room_name);
 		exit(1);
 	}
-		
 }

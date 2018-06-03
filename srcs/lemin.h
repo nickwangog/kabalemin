@@ -39,8 +39,7 @@ typedef struct s_ants	t_ants;
 
 struct			s_rooms
 {
-	char		*name;                                                                                                                              
-	//int			num;
+	char		*name;
 	int16_t		x;
 	int16_t		y;
 	t_rooms		*next;
@@ -87,24 +86,19 @@ struct			s_lem
 	char		buf[30000];
 };
 
-/* typedef struct t_queue
-{
-	t_rooms *start;
-} */
-
 void			read_lemin(t_lem *lem);
 void			lem_error(char *s);
 void			create_room(t_lem *lem);
 int				countspace(char *s);
 void			create_link(t_lem *lem);
 void			add_link(t_lem *lem);
-void        	dijkstra(t_lem *lem, int16_t start);
+void			dijkstra(t_lem *lem, int16_t start);
 void			dijk_init(t_lem *lem);
 void			print_lemin(t_lem *lem);
-int 			is_no_rlinks(t_rooms *head, char *room_name);
+int				is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);
 void			move_ants(t_lem *lem);
-unsigned int    lcm(unsigned int a, unsigned int b);
+unsigned int	lcm(unsigned int a, unsigned int b);
 void			count_sr_conn(t_lem *lem);
 #endif

@@ -22,7 +22,7 @@ int		main(int argc, char **argv)
 		lem_error("usage: ./lem-in < (map)");
 	read_lemin(&lem);
 	dijk_init(&lem);
-	if(is_valid_start_end(&lem))
+	if (is_valid_start_end(&lem))
 		lem_error("no valid path between start and end rooms");
 	//check if end room is INF, no valid solution
 	//valid path from start to end && no rooms without links

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 19:20:03 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/29 18:02:49 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/02 17:58:15 by nwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				link_validation(t_lem *lem)
 	if (temp)
 	{
 		if (!check_duplicate_link(lem->a->path, lem->b) ||
-			!check_duplicate_link(lem->b->path, lem->a))
+				!check_duplicate_link(lem->b->path, lem->a))
 			lem_error("duplicate link in the map");
 		return (1);
 	}
@@ -57,12 +57,10 @@ void			create_link(t_lem *lem)
 	lem->tab = ft_strsplit(lem->line, '-');
 	if (link_validation(lem))
 	{
-		//check_duplication(lem);
 		add_link(lem);
 		ft_memdel((void **)&lem->tab[0]);
 		ft_memdel((void**)&lem->tab[1]);
 		ft_memdel((void**)lem->tab);
-		//printf("%s, %p\n",lem->tab[0], lem->tab);
 		lem->a = 0;
 		lem->b = 0;
 	}
@@ -89,18 +87,19 @@ void			add_link(t_lem *lem)
 	lem->b->num_links++;
 }
 
-int is_no_rlinks(t_rooms *head, char *room_name)
+int				is_no_rlinks(t_rooms *head, char *room_name)
 {
 	t_rooms *temp;
+
 	temp = head;
-	while(temp)
+	while (temp)
 	{
-		if(temp->num_links == 0)
+		if (temp->num_links == 0)
 		{
 			ft_strcpy(room_name, temp->name);
-			return(1);
+			return (1);
 		}
-			temp = temp->next;
+		temp = temp->next;
 	}
-	return(0);
+	return (0);
 }

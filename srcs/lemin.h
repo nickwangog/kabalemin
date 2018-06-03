@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/02 19:05:04 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/03 07:11:59 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ struct			s_lem
 	int8_t		start;
 	int8_t		end;
 	int16_t		num_room;
+	int8_t		j;
+	t_path		*p;	
 	char		*line;
 	int16_t		links;
 	uint32_t	**dist;
@@ -99,7 +101,7 @@ void			dijk_init(t_lem *lem);
 int				is_no_rlinks(t_rooms *head, char *room_name);
 int				is_valid_start_end(t_lem *lem);
 void			sort_path(t_path **tmp, t_lem *lem);
-void			move_ants(t_lem *lem);
+void			lem_ants(t_lem	*lem);
 unsigned int	lcm(unsigned int a, unsigned int b);
 void			count_sr_conn(t_lem *lem);
 #endif

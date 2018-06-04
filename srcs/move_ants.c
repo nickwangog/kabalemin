@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:17:17 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/03 10:04:02 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/03 19:20:08 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,25 @@ int16_t		path_decision(t_lem *lem)
 		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
 		p = p->next;
 	}
+	temp /= j;
 	return(temp);
 }
 
 void	best_lcm(t_lem *lem)
 {
 	lem->sum_lcm = path_decision(lem);
-	while (lem->sum_lcm > lem->ant_num)
+	while (lem->sum_lcm > lem->start_ants)
 	{
 		lem->count--;
 		lem->sum_lcm = path_decision(lem);
 	}
-	printf("lem->count value = %d | lcm =  %d\n", lem->count, lem->sum_lcm);
 }
 
 void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 {
-	//if(a->ant_room != lem->sr)
-		a->ant_room->has_ant = 0;
+	if(a->ant_room == lem->sr)
+		lem->start_ants--;
+	a->ant_room->has_ant = 0;
 	a->ant_room = r;
 	a->ant_room->has_ant = 1;
 	lem->board_ants -= r == lem->er ? 1 : 0;
@@ -73,10 +74,11 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 
 void move_ant_start(t_lem *lem, t_ants *a)
 {
-	printf("im here\n");
-	if (lem->sum_lcm <= lem->ant_num)
+	if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
+		move_ant(lem, a, lem->sr->path->link_room);
+	else if(lem->sum_lcm <= lem->start_ants)
 	{
-		if(lem->j < lem->count)
+		if(lem->j <= lem->count)
 		{
 			if (lem->j == lem->count - 1)
 			{
@@ -84,25 +86,20 @@ void move_ant_start(t_lem *lem, t_ants *a)
 				lem->p = lem->sr->path;
 			}
 			if(lem->p->link_room->has_ant == 0)
-			{
 				move_ant(lem, a, lem->p->link_room);
-				//lem->p->link_room->has_ant = 1;
-				lem->start_ants--;
-				lem->j++;
-			}
 			else
 			{
-				lem->p = lem->p->next;
-				printf("rom_name = %s\n", lem->p->link_room->name);
-				move_ant(lem, a, lem->p->link_room);
-				//lem->p->link_room->has_ant = 1;
-				lem->start_ants--;
-				lem->j++;
+				if(lem->p->next != NULL)
+				{
+					lem->p = lem->p->next;
+					if(lem->p->link_room->has_ant == 0)
+						move_ant(lem, a, lem->p->link_room);
+				}
 			}
-			
+			lem->j++;
 		}
 	}
-	if(lem->sum_lcm >= lem->ant_num && lem->count != 1)
+	if(lem->sum_lcm > lem->start_ants)
 		best_lcm(lem);
 }
 
@@ -112,33 +109,35 @@ void lem_ants(t_lem	*lem)
 	int16_t j;
 	int16_t dist1;
 	int16_t dist2;
-	//int16_t temp;
 	t_ants ants[lem->ant_num];
 	
 	j = -1;
 	ant_init(ants, lem->ant_num, lem->sr);
-	lem->sum_lcm = path_decision(lem);
 	lem->board_ants = lem->ant_num;
 	lem->start_ants = lem->ant_num;
 	lem->p = lem->sr->path;
-	// check_start_paths(lem);
+	lem->sum_lcm = path_decision(lem);
+
 	while (lem->board_ants)
 	{
-		// printf("board_ants = %d\n",lem->board_ants);
 		i = -1;
 		while (++i < lem->ant_num)
 		{
-			if (ants[i].ant_room == lem->sr)
+			// if(i == 2)
+			// 	ft_printf("ant name = %s\n",ants[i].ant_room->path->link_room->name);
+			if (ants[i].ant_room->path->link_room == lem->er)
 			{
-				printf("------------->i = %d", i);
+				move_ant(lem, &ants[i], ants[i].ant_room->path->link_room);
+				continue;
+			}
+			else if (ants[i].ant_room == lem->sr)
+			{
 				move_ant_start(lem, &ants[i]);
-				//continue;
+				continue;
 			}
 			else if (ants[i].ant_room == lem->er)
-				continue ;
-			else if (ants[i].ant_room->path->link_room == lem->er)
-				move_ant(lem, &ants[i], lem->er);
-			else if (/* (ants[i].ant_room != lem->sr) && ( */ants[i].ant_room->path->link_room->has_ant == 0)
+				continue;
+			else if (ants[i].ant_room->path->link_room->has_ant == 0)
 				move_ant(lem, &ants[i], ants[i].ant_room->path->link_room);
 			else
 			{
@@ -153,6 +152,7 @@ void lem_ants(t_lem	*lem)
 					lem->p = lem->p->next;
 				}
 			}
+			
 		}
 		ft_putstr("\n");
 	}

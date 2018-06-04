@@ -3,7 +3,4 @@
 start 0 0
 ##end
 end 1 1
-room 3 4
-rom2 4 0
-start-room
-end-rom2
+start-end

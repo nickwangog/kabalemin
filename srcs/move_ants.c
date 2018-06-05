@@ -79,7 +79,6 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 void move_ant_start(t_lem *lem, t_ants *a)
 {	
 	
-	//printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
 	// if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
 	// 	move_ant(lem, a, lem->sr->path->link_room);
 	if(lem->sum_lcm <= lem->start_ants)
@@ -88,9 +87,10 @@ void move_ant_start(t_lem *lem, t_ants *a)
 		if(lem->j < lem->sum_lcm)
 		{
 			if (dist_equ(lem) && lem->sum_lcm == 1)
-			{
 				lem->sum_lcm = lem->sr->num_links;
-			}
+			if (lem->sr->num_links == 1)
+				lem->sum_lcm = 1;
+			printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
 			if(lem->p->link_room->has_ant == 0)
 			{
 				//ft_printf("Ant: %d goes from %s to %s", a->ant_id + 1, a->ant_room->name, lem->p->link_room->name);
@@ -146,6 +146,8 @@ void lem_ants(t_lem	*lem)
 			// if(i == 6)
 			// 	exit(1);
 			// 	ft_printf("ant name = %s\n",ants[i].ant_room->path->link_room->name);
+			if (i == 1 && lem->start_ants <= 2)
+				ft_putstr("kkshgohweogehgogeg");
 			if (ants[i].ant_room->path->link_room == lem->er)
 			{
 				// ft_putstr("kkshgohweogehgogeg");
@@ -172,7 +174,6 @@ void lem_ants(t_lem	*lem)
 			}
 			else
 			{
-				// ft_putstr("kkshgohweogehgogeg");
 				//  exit (1);
 				lem->p = ants[i].ant_room->path->next;
 				while(lem->p)
@@ -192,11 +193,11 @@ void lem_ants(t_lem	*lem)
 				lem->j = 0;
 				lem->p = lem->sr->path;
 			}
-			// if(lem->start_ants <= 3 && i == 2)
-			// {
-			// 	printf("start: %d | count: %d | sumlcm: %d | j: %d", lem->start_ants, lem->count, lem->sum_lcm, lem->j);
-			// 	exit(1);
-			// }
+			if(lem->start_ants <= 1 && i == 0)
+			{
+				printf("start: %d | count: %d | sumlcm: %d | j: %d", lem->start_ants, lem->count, lem->sum_lcm, lem->j);
+				exit(1);
+			}
 		}
 		ft_putstr("\n");
 	}

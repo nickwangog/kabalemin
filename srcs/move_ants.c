@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:17:17 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/03 19:20:08 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/04 18:27:39 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,31 @@ int16_t		path_decision(t_lem *lem)
 	
 	p = lem->sr->path;
 	lem->count = lem->sr->num_links;
-	printf("links =n%d\n", lem->sr->num_links);
+	//printf("links =n%d\n", lem->sr->num_links);
 	j = lem->count;		
 	while(j--)
 	{
 		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
+		//printf("temp = %d\n", temp);
 		p = p->next;
 	}
-	temp /= j;
+
 	return(temp);
 }
 
 void	best_lcm(t_lem *lem)
 {
 	lem->sum_lcm = path_decision(lem);
-	while (lem->sum_lcm > lem->start_ants)
+	//exit (1);
+	if(!dist_equ(lem))
+		lem->sum_lcm /= lem->count;
+	while ((lem->sum_lcm > lem->start_ants) && lem->sum_lcm > 1)
 	{
 		lem->count--;
 		lem->sum_lcm = path_decision(lem);
+		if(!dist_equ(lem))
+			lem->sum_lcm /= lem->count;
+		//printf("j = %d | start ant = %d\n", lem->sum_lcm, lem->count);
 	}
 }
 
@@ -67,40 +74,37 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	//print the space;
 }
 
-/* check_start_paths(t_lem *lem);
-{
-
-} */
-
 void move_ant_start(t_lem *lem, t_ants *a)
-{
-	if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
-		move_ant(lem, a, lem->sr->path->link_room);
-	else if(lem->sum_lcm <= lem->start_ants)
+{	
+	
+	//printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
+	// if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
+	// 	move_ant(lem, a, lem->sr->path->link_room);
+	if(lem->sum_lcm <= lem->start_ants)
 	{
-		if(lem->j <= lem->count)
+				
+		if(lem->j < lem->sum_lcm)
 		{
-			if (lem->j == lem->count - 1)
-			{
-				lem->j = 0;
-				lem->p = lem->sr->path;
-			}
 			if(lem->p->link_room->has_ant == 0)
-				move_ant(lem, a, lem->p->link_room);
-			else
 			{
-				if(lem->p->next != NULL)
+				move_ant(lem, a, lem->p->link_room);
+				lem->j++;
+			}
+			else if(lem->j < lem->sum_lcm)
+			{
+				if(lem->p->next)
 				{
 					lem->p = lem->p->next;
 					if(lem->p->link_room->has_ant == 0)
 						move_ant(lem, a, lem->p->link_room);
+					lem->j++;
 				}
 			}
-			lem->j++;
 		}
 	}
-	if(lem->sum_lcm > lem->start_ants)
+	if((lem->sum_lcm > lem->start_ants) && lem->start_ants)
 		best_lcm(lem);
+	//exit(1);
 }
 
 void lem_ants(t_lem	*lem)
@@ -113,27 +117,29 @@ void lem_ants(t_lem	*lem)
 	
 	j = -1;
 	ant_init(ants, lem->ant_num, lem->sr);
-	lem->board_ants = lem->ant_num;
 	lem->start_ants = lem->ant_num;
+	lem->board_ants = lem->ant_num;
 	lem->p = lem->sr->path;
-	lem->sum_lcm = path_decision(lem);
-
+	best_lcm(lem);
+	printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
+	//exit(1);
 	while (lem->board_ants)
 	{
 		i = -1;
 		while (++i < lem->ant_num)
 		{
-			// if(i == 2)
+			// if(i == 6)
+			// 	exit(1);
 			// 	ft_printf("ant name = %s\n",ants[i].ant_room->path->link_room->name);
 			if (ants[i].ant_room->path->link_room == lem->er)
 			{
 				move_ant(lem, &ants[i], ants[i].ant_room->path->link_room);
-				continue;
+				//continue;
 			}
 			else if (ants[i].ant_room == lem->sr)
 			{
 				move_ant_start(lem, &ants[i]);
-				continue;
+				
 			}
 			else if (ants[i].ant_room == lem->er)
 				continue;
@@ -141,6 +147,8 @@ void lem_ants(t_lem	*lem)
 				move_ant(lem, &ants[i], ants[i].ant_room->path->link_room);
 			else
 			{
+				ft_putstr("kkshgohweogehgogeg\n");
+				exit (1);
 				lem->p = ants[i].ant_room->path->next;
 				while(lem->p)
 				{
@@ -152,8 +160,37 @@ void lem_ants(t_lem	*lem)
 					lem->p = lem->p->next;
 				}
 			}
-			
+			if(lem->j == lem->sum_lcm)
+			{
+				lem->j = 0;
+				lem->p = lem->sr->path;
+			}
 		}
 		ft_putstr("\n");
 	}
+	if(a->ant_id == 3)
+	{
+		printf("start: %d | count: %d | sumlcm: %d | j: %d\n", lem->start_ants, lem->count, lem->sum_lcm, lem->j);
+		exit(1);
+	}
+}
+
+int		dist_equ(t_lem *lem)
+{
+	t_path *p;
+	int dist;
+	int check;
+
+	dist = 0;
+	p = lem->sr->path;
+	check = lem->dist[p->link_room->room_id][lem->er->room_id];
+	while(p)
+	{
+		dist = lem->dist[p->link_room->room_id][lem->er->room_id];
+		//printf("dist = %d  check = %d\n", dist, check);
+		if (check != dist)
+			return(0);
+		p = p->next;
+	}
+	return (1);
 }

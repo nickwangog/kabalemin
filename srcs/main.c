@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:32:22 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/02 21:46:08 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/04 14:58:30 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 int		main(int argc, char **argv)
 {
 	t_lem	lem;
-
+	
 	ft_bzero(&lem, sizeof(t_lem));
 	(void)argv;
 	if (argc > 1)
 		lem_error("usage: ./lem-in < (map)");
+	//is_endroom(lem);
 	read_lemin(&lem);
 	dijk_init(&lem);
 	if (is_valid_start_end(&lem))
 		lem_error("no valid path between start and end rooms");
+
 	lem_ants(&lem);
 	//ft_putstr(lem.buf);
 	return (0);

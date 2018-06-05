@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/05/31 23:59:32 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/04 14:58:56 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			dijk_init(t_lem *lem)
 {
 	int16_t		i;
 	t_rooms		*tmp;
-
+	
 	i = 0;
 	lem->dist = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
 	lem->shortest = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
@@ -96,3 +96,28 @@ void			dijkstra(t_lem *lem, int16_t room_id)
 		i++;
 	}
 }
+
+/* int8_t is_endroom(t_lem * lem)
+{
+	
+	i = 0;
+	t_rooms		*temp;
+	while(i < lem->num_room)
+	{
+		temp = lem->head;
+		while(temp)
+		{
+			bfs(lem, temp);
+			temp = temp->next;
+		}
+		
+	}
+}
+
+void bfs(t_lem *lem, t_rooms *t)
+{
+	t_queue		*q;
+	t_path		*p;
+	int16_t		i;
+	q = init(q);
+} */

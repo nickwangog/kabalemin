@@ -82,15 +82,15 @@ void move_ant_start(t_lem *lem, t_ants *a)
 	//printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
 	// if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
 	// 	move_ant(lem, a, lem->sr->path->link_room);
-	if (dist_equ(lem) && lem->sum_lcm == 1)
-	{
-		lem->j = lem->sr->num_links;
-	}
 	if(lem->sum_lcm <= lem->start_ants)
 	{
 				
 		if(lem->j < lem->sum_lcm)
 		{
+			if (dist_equ(lem) && lem->sum_lcm == 1)
+			{
+				lem->sum_lcm = lem->sr->num_links;
+			}
 			if(lem->p->link_room->has_ant == 0)
 			{
 				//ft_printf("Ant: %d goes from %s to %s", a->ant_id + 1, a->ant_room->name, lem->p->link_room->name);

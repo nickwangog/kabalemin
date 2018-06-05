@@ -60,10 +60,7 @@ void	best_lcm(t_lem *lem)
 			lem->sum_lcm /= lem->count;
 		//printf("j = %d | start ant = %d\n", lem->sum_lcm, lem->count);
 	}
-	if (dist_equ(lem) && lem->sum_lcm == 1)
-	{
-		lem->sum_lcm = lem->sr->num_links;
-	}
+	
 
 }
 
@@ -85,6 +82,10 @@ void move_ant_start(t_lem *lem, t_ants *a)
 	//printf("stat_ant = %d | %d | %d\n", lem->start_ants, lem->count, lem->sum_lcm);
 	// if(lem->sr->num_links == 1 && !lem->sr->path->link_room->has_ant)
 	// 	move_ant(lem, a, lem->sr->path->link_room);
+	if (dist_equ(lem) && lem->sum_lcm == 1)
+	{
+		lem->j = lem->sr->num_links;
+	}
 	if(lem->sum_lcm <= lem->start_ants)
 	{
 				

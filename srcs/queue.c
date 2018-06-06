@@ -6,22 +6,12 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 05:49:29 by lkaba             #+#    #+#             */
-/*   Updated: 2018/06/05 17:29:27 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/05 17:37:26 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-//Queue Init
-
-t_queue *init(t_queue *q)
-{
-	if(!(q = (t_queue *)malloc(sizeof(t_queue))))
-		lem_error("Malloc fail");
-	q->front = NULL;
-	q->front = NULL;
-	return(q);
-}
 //enqueue
 void enqueue(t_queue *q, t_rooms *r)
 {

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/05 17:31:29 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/05 17:44:22 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,34 +108,39 @@ void			check_endroom(t_lem *lem)
 		bfs(lem, p->link_room);
 		p = p->next;
 	}
+	
+	t_rooms		*rm = lem->head;
+	while(rm)
+	{
+		printf("rom name = %s | has ant = %d\n", rm->name, rm->has_ant);
+		rm = rm->next;
+	}
 }
 
 void bfs(t_lem *lem, t_rooms *r)
 {
-	int16_t V[lem->num_room];
-
-	t_queue		*q;
+	t_queue	q;
 	t_path		*t;
 	int16_t		i;
+	int16_t V[lem->num_room];
 	
-	q = NULL;
-	q = init(q);
+	ft_bzero((t_queue *)&q, sizeof(t_queue));
 	i = -1;
 	while (++i < lem->num_room)
 		V[i] = 0;
 	V[r->room_id] = 1;
 	V[lem->sr->room_id] = 1;
-	enqueue(q, r);
-	while (!(is_empty(q)))
+	enqueue(&q, r);
+	while (!(is_empty(&q)))
 	{
-		r = dequeue(q);
+		r = dequeue(&q);
 		t = r->path;
 		while (t)
 		{
 			if(V[t->link_room->room_id] == 0)
 			{
 				V[t->link_room->room_id] = 1;
-				enqueue(q, t->link_room);
+				enqueue(&q, t->link_room);
 			}
 			t = t->next;
 		}

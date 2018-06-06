@@ -26,7 +26,6 @@ int				check_duplicate_link(t_path *iter, t_rooms *link_to_add)
 int				link_validation(t_lem *lem)
 {
 	t_rooms		*temp;
-	t_path		*temp1;
 
 	temp = lem->head;
 	if (!ft_strcmp(lem->tab[0], lem->tab[1]))
@@ -40,7 +39,6 @@ int				link_validation(t_lem *lem)
 		if (lem->a && lem->b)
 			break ;
 		temp = temp->next;
-		temp1 = NULL;
 	}
 	if (temp)
 	{
@@ -58,14 +56,15 @@ void			create_link(t_lem *lem)
 	if (link_validation(lem))
 	{
 		add_link(lem);
-		ft_memdel((void **)&lem->tab[0]);
-		ft_memdel((void**)&lem->tab[1]);
-		ft_memdel((void**)lem->tab);
 		lem->a = 0;
 		lem->b = 0;
 	}
 	else
 		lem_error("Incognito link name");
+	free(lem->tab[0]);
+	free(lem->tab[1]);
+	free(lem->tab);
+	lem->tab = NULL;
 }
 
 void			add_link(t_lem *lem)

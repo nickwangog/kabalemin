@@ -32,9 +32,9 @@ int		main(int argc, char **argv)
 		lem_error("no valid path between start and end rooms");
 	check_endroom(&lem);
 	if (lem.color)
-		ft_printf(C_MAG "%s\n" C_RESET, lem.buf);
+		ft_printf(C_MAG "%d\n%s\n" C_RESET, lem.ant_num, lem.buf);
 	else
-		ft_printf("%s\n", lem.buf);
+		ft_printf("%d\n%s\n", lem.ant_num, lem.buf);
 	lem_ants(&lem, 0, 0, 0);
 	return (0);
 }

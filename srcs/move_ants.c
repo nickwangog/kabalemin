@@ -78,12 +78,14 @@ void			move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	a->ant_room = r;
 	a->ant_room->has_ant = 1;
 	lem->board_ants -= r == lem->er ? 1 : 0;
+	if (lem->space)
+		ft_putchar(' ');
+	lem->space = 1;
 	if (lem->color)
-		ft_printf(C_CYN "L" C_GRN "%d" C_RED "-" C_YEL "%s ",
+		ft_printf(C_CYN "L" C_GRN "%d" C_RED "-" C_YEL "%s",
 			a->ant_id + 1, a->ant_room->name);
 	else
-		ft_printf("L%d-%s ", a->ant_id + 1, a->ant_room->name);
-	lem->space = 1;
+		ft_printf("L%d-%s", a->ant_id + 1, a->ant_room->name);
 }
 
 void			move_antcheck(t_lem *lem, t_ants *a, t_rooms *r)
@@ -120,6 +122,7 @@ void			lem_ants(t_lem *lem, int16_t i, int16_t d1, int16_t d2)
 	while (lem->board_ants)
 	{
 		i = -1;
+		lem->space = 0;
 		while (++i < lem->ant_num)
 		{
 			if (lem->sum_lcm >= lem->start_ants)

@@ -73,7 +73,7 @@ struct				s_path
 
 struct				s_ants
 {
-	int8_t			ant_id;
+	int16_t			ant_id;
 	t_rooms			*ant_room;
 };
 
@@ -110,7 +110,7 @@ struct				s_lem
 
 void				read_lemin(t_lem *lem);
 void				lem_error(char *s);
-void				create_room(t_lem *lem);
+void				create_room(t_lem *lem, t_rooms *temp, t_rooms *temp1);
 int					countspace(char *s);
 void				create_link(t_lem *lem);
 void				add_link(t_lem *lem);

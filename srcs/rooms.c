@@ -20,21 +20,18 @@ void	cleartab(t_lem *lem)
 	free(lem->tab);
 }
 
-void	create_room(t_lem *lem)
+void	create_room(t_lem *lem, t_rooms *temp, t_rooms *temp1)
 {
-	t_rooms *temp;
-	t_rooms *temp1;
-
 	if (!(temp = (t_rooms *)ft_memalloc(sizeof(t_rooms))))
-		lem_error("failed to malloc");
+		lem_error("failed to malloc size of t_rooms");
 	temp->next = lem->head;
 	temp->name = ft_strdup(lem->tab[0]);
 	lem->sr = !lem->sr && lem->start == 1 ? temp : lem->sr;
 	lem->er = !lem->er && lem->end == 1 ? temp : lem->er;
 	ft_linedigit(lem->tab[1]) ? temp->x =
-		ft_atoi(lem->tab[1]) : lem_error("invalid rooms");
+		ft_atoi(lem->tab[1]) : lem_error("invalid room coordinates");
 	ft_linedigit(lem->tab[2]) ? temp->y =
-		ft_atoi(lem->tab[2]) : lem_error("invalid rooms");
+		ft_atoi(lem->tab[2]) : lem_error("invalid rooms coordinates");
 	cleartab(lem);
 	temp1 = lem->head;
 	while (temp1)

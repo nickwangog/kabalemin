@@ -24,9 +24,8 @@ int		main(int argc, char **argv)
 	dijk_init(&lem);
 	if (is_valid_start_end(&lem))
 		lem_error("no valid path between start and end rooms");
-
 	check_endroom(&lem);
-	//lem_ants(&lem);
+	lem_ants(&lem);
 	//ft_putstr(lem.buf);
 	return (0);
 }

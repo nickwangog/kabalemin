@@ -109,12 +109,12 @@ void			check_endroom(t_lem *lem)
 		p = p->next;
 	}
 	
-	t_rooms		*rm = lem->head;
-	while(rm)
-	{
-		printf("rom name = %s | has ant = %d\n", rm->name, rm->has_ant);
-		rm = rm->next;
-	}
+	// t_rooms		*rm = lem->head;
+	// while(rm)
+	// {
+	// 	printf("rom name = %s | has ant = %d\n", rm->name, rm->has_ant);
+	// 	rm = rm->next;
+	// }
 }
 
 void bfs(t_lem *lem, t_rooms *r)

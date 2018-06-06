@@ -87,7 +87,7 @@ struct			s_lem
 	t_rooms		*er;
 	t_ants		*tab_ants;
 	int16_t		count;
-	int16_t		rem_ants;
+	int16_t		p_to_take;
 	int16_t		ant_num;
 	int16_t		start_ants;
 	int16_t		board_ants;
@@ -95,7 +95,8 @@ struct			s_lem
 	int8_t		end;
 	int16_t		num_room;
 	int8_t		j;
-	t_path		*p;	
+	t_path		*p;
+	t_path		*k;
 	char		*line;
 	int16_t		links;
 	uint32_t	**dist;

@@ -12,17 +12,16 @@
 
 #include "lemin.h"
 
-//enqueue
-void enqueue(t_queue *q, t_rooms *r)
+void		enqueue(t_queue *q, t_rooms *r)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	tmp = (t_node *)malloc(sizeof(t_node));
 	if (!tmp)
 		lem_error("Malloc fail");
 	tmp->r = r;
 	tmp->next = NULL;
-	if(is_empty(q))
+	if (is_empty(q))
 	{
 		q->rear = tmp;
 		q->front = tmp;
@@ -31,8 +30,8 @@ void enqueue(t_queue *q, t_rooms *r)
 	q->rear->next = tmp;
 	q->rear = tmp;
 }
-//dequeue
-t_rooms	*dequeue(t_queue *q)
+
+t_rooms		*dequeue(t_queue *q)
 {
 	t_node	*tmp;
 	t_rooms	*tp_data;
@@ -51,13 +50,13 @@ t_rooms	*dequeue(t_queue *q)
 	free(tmp);
 	return (tp_data);
 }
-//front
-void	*front(t_queue *q)
+
+void		*front(t_queue *q)
 {
-	return(q->front->r);
+	return (q->front->r);
 }
-//is_empty
-int is_empty(t_queue *q)
+
+int			is_empty(t_queue *q)
 {
-	return(q->front == NULL);
+	return (q->front == NULL);
 }

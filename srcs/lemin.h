@@ -40,93 +40,91 @@ typedef struct s_ants	t_ants;
 typedef struct s_node	t_node;
 typedef struct s_queue	t_queue;
 
-struct s_node		
+struct				s_node
 {
-	t_rooms *r;
-	struct s_node *next;
+	t_rooms			*r;
+	struct s_node	*next;
 };
 
-struct s_queue
+struct				s_queue
 {
-	t_node		*front;
-	t_node		*rear;
+	t_node			*front;
+	t_node			*rear;
 };
 
-struct			s_rooms
+struct				s_rooms
 {
-	char		*name;
-	int16_t		x;
-	int16_t		y;
-	t_rooms		*next;
-	int8_t		visited;
-	int16_t		room_id;
-	t_path		*path;
-	int32_t		num_links;
-	int8_t		has_ant;
+	char			*name;
+	int16_t			x;
+	int16_t			y;
+	t_rooms			*next;
+	int8_t			visited;
+	int16_t			room_id;
+	t_path			*path;
+	int32_t			num_links;
+	int8_t			has_ant;
 };
 
-struct			s_path
+struct				s_path
 {
-	t_rooms		*link_room;
-	t_path		*next;
+	t_rooms			*link_room;
+	t_path			*next;
 };
 
-struct			s_ants
+struct				s_ants
 {
-	int8_t		ant_id;
-	t_rooms		*ant_room;
+	int8_t			ant_id;
+	t_rooms			*ant_room;
 };
 
-struct			s_lem
+struct				s_lem
 {
-	t_rooms		*head;
-	t_rooms		*room;
-	t_rooms		*a;
-	t_rooms		*b;
-	char		**tab;
-	t_rooms		*sr;
-	t_rooms		*er;
-	t_ants		*tab_ants;
-	int16_t		count;
-	int16_t		p_to_take;
-	int16_t		ant_num;
-	int16_t		start_ants;
-	int16_t		board_ants;
-	int8_t		start;
-	int8_t		end;
-	int8_t		space;
-	int16_t		num_room;
-	t_path		*p;
-	t_path		*k;
-	char		*line;
-	int16_t		j;
-	int16_t		links;
-	uint32_t	**dist;
-	uint32_t	**shortest;
-	int16_t		sum_lcm;
-	int8_t		color;
-	char		buf[30000];
+	t_rooms			*head;
+	t_rooms			*room;
+	t_rooms			*a;
+	t_rooms			*b;
+	char			**tab;
+	t_rooms			*sr;
+	t_rooms			*er;
+	t_ants			*tab_ants;
+	int16_t			count;
+	int16_t			p_to_take;
+	int16_t			ant_num;
+	int16_t			start_ants;
+	int16_t			board_ants;
+	int8_t			start;
+	int8_t			end;
+	int8_t			space;
+	int16_t			num_room;
+	t_path			*p;
+	t_path			*k;
+	char			*line;
+	int16_t			j;
+	int16_t			links;
+	uint32_t		**dist;
+	uint32_t		**shortest;
+	int16_t			sum_lcm;
+	int8_t			color;
+	char			buf[30000];
 };
 
-void			read_lemin(t_lem *lem);
-void			lem_error(char *s);
-void			create_room(t_lem *lem);
-int				countspace(char *s);
-void			create_link(t_lem *lem);
-void			add_link(t_lem *lem);
-void			dijkstra(t_lem *lem, int16_t start);
-void			dijk_init(t_lem *lem);
-int				is_no_rlinks(t_rooms *head, char *room_name);
-int				is_valid_start_end(t_lem *lem);
-void			sort_path(t_path **tmp, t_lem *lem);
-void			lem_ants(t_lem	*lem);
-unsigned int	lcm(unsigned int a, unsigned int b);
-void			count_sr_conn(t_lem *lem);
-t_queue			*init(t_queue *q);
-void			enqueue(t_queue *q, t_rooms *r);
-t_rooms			*dequeue(t_queue *q);
-int				is_empty(t_queue *q);
-int				dist_equ(t_lem *lem);
-void			check_endroom(t_lem *lem);
-void 			bfs(t_lem *lem, t_rooms *t);
+void				read_lemin(t_lem *lem);
+void				lem_error(char *s);
+void				create_room(t_lem *lem);
+int					countspace(char *s);
+void				create_link(t_lem *lem);
+void				add_link(t_lem *lem);
+void				dijkstra(t_lem *lem, int16_t start);
+void				dijk_init(t_lem *lem);
+int					is_no_rlinks(t_rooms *head, char *room_name);
+int					is_valid_start_end(t_lem *lem);
+void				sort_path(t_path **tmp, t_lem *lem);
+void				lem_ants(t_lem	*lem);
+unsigned int		lcm(unsigned int a, unsigned int b);
+t_queue				*init(t_queue *q);
+void				enqueue(t_queue *q, t_rooms *r);
+t_rooms				*dequeue(t_queue *q);
+int					is_empty(t_queue *q);
+void				check_endroom(t_lem *lem);
+void				bfs(t_lem *lem, t_rooms *t);
 #endif

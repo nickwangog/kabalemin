@@ -15,7 +15,7 @@
 int		main(int argc, char **argv)
 {
 	t_lem	lem;
-	
+
 	ft_bzero(&lem, sizeof(t_lem));
 	if (argc > 2)
 		lem_error("usage: ./lem-in < (map) (-g)");
@@ -31,9 +31,10 @@ int		main(int argc, char **argv)
 	if (is_valid_start_end(&lem))
 		lem_error("no valid path between start and end rooms");
 	check_endroom(&lem);
+	if (lem.color)
+		ft_printf(C_MAG "%s\n" C_RESET, lem.buf);
+	else
+		ft_printf("%s\n", lem.buf);
 	lem_ants(&lem);
-	//ft_putstr_fd("lsgslgjlsdglsglsgsj\n", 1);
-	//ft_putstr(lem.buf);
-	while(1);
 	return (0);
 }

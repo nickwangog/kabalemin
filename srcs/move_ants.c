@@ -82,7 +82,6 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 		ft_printf(C_CYN "L" C_GRN "%d" C_RED "-" C_YEL "%s ",a->ant_id + 1, a->ant_room->name);
 	else
 		ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
-	// ft_printf(C_CYN "L");
 	lem->space = 1;
 }
 

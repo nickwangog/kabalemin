@@ -94,10 +94,10 @@ struct			s_lem
 	int8_t		start;
 	int8_t		end;
 	int16_t		num_room;
-	int8_t		j;
 	t_path		*p;
 	t_path		*k;
 	char		*line;
+	int16_t		j;
 	int16_t		links;
 	uint32_t	**dist;
 	uint32_t	**shortest;

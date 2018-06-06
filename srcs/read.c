@@ -29,8 +29,8 @@ void		read_ants(t_lem *lem)
 			{
 				lem->ant_num = ft_atoi(lem->line);
 				ft_strdel(&lem->line);
-				if (lem->ant_num < 1)
-					lem_error("invalid ants");
+				if (lem->ant_num < 1 || lem->ant_num > 32767)
+					lem_error("invalid ants (1-32767)");
 				break ;
 			}
 			ft_strdel(&lem->line);

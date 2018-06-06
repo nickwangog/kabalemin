@@ -12,7 +12,8 @@
 
 #include "lemin.h"
 
-t_rooms			*check_r(uint32_t *dist, uint32_t *shortest, int num_room, t_rooms *head)
+t_rooms			*check_r(uint32_t *dist,
+	uint32_t *shortest, int num_room, t_rooms *head)
 {
 	uint32_t	min;
 	int			i;
@@ -42,7 +43,7 @@ void			dijk_init(t_lem *lem)
 {
 	int16_t		i;
 	t_rooms		*tmp;
-	
+
 	i = 0;
 	lem->dist = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
 	lem->shortest = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
@@ -55,7 +56,7 @@ void			dijk_init(t_lem *lem)
 	tmp = lem->head;
 	while (tmp)
 	{
-		dijkstra(lem, tmp->room_id);
+		dijkstra(lem, tmp->room_id, 0);
 		tmp = tmp->next;
 	}
 	tmp = lem->head;
@@ -66,13 +67,11 @@ void			dijk_init(t_lem *lem)
 	}
 }
 
-void			dijkstra(t_lem *lem, int16_t room_id)
+void			dijkstra(t_lem *lem, int16_t room_id, int i)
 {
 	t_rooms		*r_check;
 	t_path		*p;
-	int			i;
 
-	i = 0;
 	while (i < lem->num_room)
 	{
 		lem->dist[room_id][i] = INF;
@@ -101,50 +100,12 @@ void			check_endroom(t_lem *lem)
 {
 	t_path		*p;
 	int16_t		i;
+
 	i = -1;
 	p = lem->sr->path;
-	while(p)
+	while (p)
 	{
-		bfs(lem, p->link_room);
+		bfs(lem, p->link_room, -1);
 		p = p->next;
 	}
-	
-	// t_rooms		*rm = lem->head;
-	// while(rm)
-	// {
-	// 	printf("rom name = %s | has ant = %d\n", rm->name, rm->has_ant);
-	// 	rm = rm->next;
-	// }
-}
-
-void bfs(t_lem *lem, t_rooms *r)
-{
-	t_queue	q;
-	t_path		*t;
-	int16_t		i;
-	int16_t V[lem->num_room];
-	
-	ft_bzero((t_queue *)&q, sizeof(t_queue));
-	i = -1;
-	while (++i < lem->num_room)
-		V[i] = 0;
-	V[r->room_id] = 1;
-	V[lem->sr->room_id] = 1;
-	enqueue(&q, r);
-	while (!(is_empty(&q)))
-	{
-		r = dequeue(&q);
-		t = r->path;
-		while (t)
-		{
-			if(V[t->link_room->room_id] == 0)
-			{
-				V[t->link_room->room_id] = 1;
-				enqueue(&q, t->link_room);
-			}
-			t = t->next;
-		}
-	}
-	if (V[lem->er->room_id] == 0)
-		r->has_ant = 1;
 }

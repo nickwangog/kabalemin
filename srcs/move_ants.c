@@ -111,7 +111,7 @@ void			move_antcheck(t_lem *lem, t_ants *a, t_rooms *r)
 	}
 }
 
-void			lem_ants(t_lem *lem, int16_t i, int16_t dist1, int16_t dist2)
+void			lem_ants(t_lem *lem, int16_t i, int16_t d1, int16_t d2)
 {
 	t_ants		ants[lem->ant_num];
 
@@ -139,10 +139,10 @@ void			lem_ants(t_lem *lem, int16_t i, int16_t dist1, int16_t dist2)
 				lem->k = ants[i].ant_room->path;
 				while (lem->k && lem->j < lem->p_to_take)
 				{
-					dist1 = lem->dist[lem->k->link_room->room_id][lem->er->room_id];
-					dist2 = lem->dist[ants[i].ant_room->room_id][lem->er->room_id];
+					d1 = lem->dist[lem->k->link_room->room_id][lem->er->room_id];
+					d2 = lem->dist[ants[i].ant_room->room_id][lem->er->room_id];
 					if (lem->k->link_room->has_ant == 0)
-						if (dist1 <= dist2)
+						if (d1 <= d2)
 						{
 							move_antcheck(lem, &ants[i], lem->k->link_room);
 							break ;

@@ -41,8 +41,8 @@ int16_t		path_decision(t_lem *lem)
 	j = lem->count;
 	while(j--)
 	{
-		if(p->link_room->has_ant == 0)
-			temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
+		//if(p->link_room->has_ant == 0)
+		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
 		p = p->next;
 	}
 	return(temp);
@@ -50,15 +50,27 @@ int16_t		path_decision(t_lem *lem)
 
 void	best_lcm(t_lem *lem)
 {
+	t_path *p;
 	lem->count = lem->sr->num_links;
+	p = lem->sr->path;
+	while(p)
+	{
+		if(p->link_room->has_ant == 1)
+			lem->count--;
+		p = p->next;
+	}
 	lem->sum_lcm = path_decision(lem);
-	lem->sum_lcm /= lem->count;
+	if(lem->count != 0)
+		lem->sum_lcm /= lem->count;
 	while (lem->sum_lcm > lem->start_ants && lem->count > 1)
 	{
 		lem->count--;
 		lem->sum_lcm = path_decision(lem);
-		lem->sum_lcm /= lem->count;
+		if(lem->count != 0)
+			lem->sum_lcm /= lem->count;
 	}
+	if (lem->sum_lcm < 1)
+		lem->sum_lcm = 1;
 }
 
 void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
@@ -70,8 +82,7 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	a->ant_room->has_ant = 1;
 	lem->board_ants -= r == lem->er ? 1 : 0;
 	ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
-	//printf("start: %d | count: %d | sumlcm: %d | j: %d\n", lem->start_ants, lem->p_to_take, lem->sum_lcm, lem->j);
-	
+	lem->space = 1;
 }
 
 void	move_antcheck(t_lem *lem, t_ants *a, t_rooms *r)
@@ -127,18 +138,21 @@ void lem_ants(t_lem	*lem)
 				move_antcheck(lem, &ants[i], ants[i].ant_room->path->link_room);
 			else
 			{
-				lem->k = ants[i].ant_room->path->next;
+				lem->k = ants[i].ant_room->path;
 				while(lem->k && lem->j < lem->p_to_take)
 				{
 					dist1 = lem->dist[lem->k->link_room->room_id][lem->er->room_id]; 
-					dist2 = lem->dist[ants[i].ant_room->room_id][lem->er->room_id];
+					dist2 = lem->dist[ants[i].ant_room->room_id][lem->er->room_id];				
 					if (lem->k->link_room->has_ant == 0)
-						if(dist1 < dist2)
+						if(dist1 <= dist2)
+						{	
 							move_antcheck(lem, &ants[i], lem->k->link_room);
+							break ;
+						}
 					lem->k = lem->k->next;
 				}
 			}
-			if(lem->j == lem->p_to_take)
+			if(lem->j >= lem->p_to_take)
 				lem->j = 0;
 		}
 		ft_putstr("\n");

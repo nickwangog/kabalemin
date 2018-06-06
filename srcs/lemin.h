@@ -93,6 +93,7 @@ struct			s_lem
 	int16_t		board_ants;
 	int8_t		start;
 	int8_t		end;
+	int8_t		space;
 	int16_t		num_room;
 	t_path		*p;
 	t_path		*k;

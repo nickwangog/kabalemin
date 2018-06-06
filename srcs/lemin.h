@@ -119,7 +119,7 @@ void				dijk_init(t_lem *lem);
 int					is_no_rlinks(t_rooms *head, char *room_name);
 int					is_valid_start_end(t_lem *lem);
 void				sort_path(t_path **tmp, t_lem *lem);
-void				lem_ants(t_lem	*lem);
+void				lem_ants(t_lem *lem, int16_t i, int16_t dist1, int16_t dist2);
 unsigned int		lcm(unsigned int a, unsigned int b);
 t_queue				*init(t_queue *q);
 void				enqueue(t_queue *q, t_rooms *r);

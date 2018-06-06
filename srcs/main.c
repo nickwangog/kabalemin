@@ -35,6 +35,6 @@ int		main(int argc, char **argv)
 		ft_printf(C_MAG "%s\n" C_RESET, lem.buf);
 	else
 		ft_printf("%s\n", lem.buf);
-	lem_ants(&lem);
+	lem_ants(&lem, 0, 0, 0);
 	return (0);
 }

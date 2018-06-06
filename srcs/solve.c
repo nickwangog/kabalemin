@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/04 14:58:56 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/05 17:31:29 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,27 +97,49 @@ void			dijkstra(t_lem *lem, int16_t room_id)
 	}
 }
 
-/* int8_t is_endroom(t_lem * lem)
+void			check_endroom(t_lem *lem)
 {
-	
-	i = 0;
-	t_rooms		*temp;
-	while(i < lem->num_room)
+	t_path		*p;
+	int16_t		i;
+	i = -1;
+	p = lem->sr->path;
+	while(p)
 	{
-		temp = lem->head;
-		while(temp)
-		{
-			bfs(lem, temp);
-			temp = temp->next;
-		}
-		
+		bfs(lem, p->link_room);
+		p = p->next;
 	}
 }
 
-void bfs(t_lem *lem, t_rooms *t)
+void bfs(t_lem *lem, t_rooms *r)
 {
+	int16_t V[lem->num_room];
+
 	t_queue		*q;
-	t_path		*p;
+	t_path		*t;
 	int16_t		i;
+	
+	q = NULL;
 	q = init(q);
-} */
+	i = -1;
+	while (++i < lem->num_room)
+		V[i] = 0;
+	V[r->room_id] = 1;
+	V[lem->sr->room_id] = 1;
+	enqueue(q, r);
+	while (!(is_empty(q)))
+	{
+		r = dequeue(q);
+		t = r->path;
+		while (t)
+		{
+			if(V[t->link_room->room_id] == 0)
+			{
+				V[t->link_room->room_id] = 1;
+				enqueue(q, t->link_room);
+			}
+			t = t->next;
+		}
+	}
+	if (V[lem->er->room_id] == 0)
+		r->has_ant = 1;
+}

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/04 17:26:00 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/05 14:35:59 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,20 @@ typedef struct s_lem	t_lem;
 typedef struct s_conn	t_conn;
 typedef struct s_path	t_path;
 typedef struct s_ants	t_ants;
+typedef struct s_node	t_node;
+typedef struct s_queue	t_queue;
 
-typedef struct s_node
+struct s_node		
 {
 	t_rooms *r;
 	struct s_node *next;
-}				t_node;
+};
 
-typedef struct s_queue
+struct s_queue
 {
 	t_node		*front;
 	t_node		*rear;
-}				t_queue;
+};
 
 struct			s_rooms
 {
@@ -116,9 +118,11 @@ void			sort_path(t_path **tmp, t_lem *lem);
 void			lem_ants(t_lem	*lem);
 unsigned int	lcm(unsigned int a, unsigned int b);
 void			count_sr_conn(t_lem *lem);
-t_queue *init(t_queue *q);
-void enqueue(t_queue *q, t_rooms *r);
-t_node	*dequeue(t_queue *q);
-int is_empty(t_queue *q);
-int	dist_equ(t_lem *lem);
+t_queue			*init(t_queue *q);
+void			enqueue(t_queue *q, t_rooms *r);
+t_rooms			*dequeue(t_queue *q);
+int				is_empty(t_queue *q);
+int				dist_equ(t_lem *lem);
+void			check_endroom(t_lem *lem);
+void 			bfs(t_lem *lem, t_rooms *t);
 #endif

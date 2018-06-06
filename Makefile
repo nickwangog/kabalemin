@@ -11,6 +11,7 @@ SRCFILES =	main.c \
 			solve.c \
 			links.c \
 			sort.c \
+			queue.c\
 			move_ants.c
 
 OBJFILES =	$(SRCFILES:.c=.o)

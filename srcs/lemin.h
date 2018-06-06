@@ -20,6 +20,7 @@
 # include <time.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <errno.h>
 # include "../libft/includes/ft_printf.h"
 # define C_RED		"\x1b[31m"
 # define C_GRN		"\x1b[32m"
@@ -103,6 +104,7 @@ struct			s_lem
 	uint32_t	**dist;
 	uint32_t	**shortest;
 	int16_t		sum_lcm;
+	int8_t		color;
 	char		buf[30000];
 };
 

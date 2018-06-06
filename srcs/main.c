@@ -17,15 +17,23 @@ int		main(int argc, char **argv)
 	t_lem	lem;
 	
 	ft_bzero(&lem, sizeof(t_lem));
-	(void)argv;
-	if (argc > 1)
-		lem_error("usage: ./lem-in < (map)");
+	if (argc > 2)
+		lem_error("usage: ./lem-in < (map) (-g)");
+	if (argc == 2)
+	{
+		if (ft_strcmp(argv[1], "-g"))
+			lem_error("usage: ./lem-in < (map) (-g)");
+		else if (!ft_strcmp(argv[1], "-g"))
+			lem.color = 1;
+	}
 	read_lemin(&lem);
 	dijk_init(&lem);
 	if (is_valid_start_end(&lem))
 		lem_error("no valid path between start and end rooms");
 	check_endroom(&lem);
 	lem_ants(&lem);
+	//ft_putstr_fd("lsgslgjlsdglsglsgsj\n", 1);
 	//ft_putstr(lem.buf);
+	while(1);
 	return (0);
 }

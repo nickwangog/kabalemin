@@ -41,7 +41,6 @@ int16_t		path_decision(t_lem *lem)
 	j = lem->count;
 	while(j--)
 	{
-		//if(p->link_room->has_ant == 0)
 		temp = lcm(lem->dist[p->link_room->room_id][lem->er->room_id], temp);
 		p = p->next;
 	}
@@ -69,8 +68,6 @@ void	best_lcm(t_lem *lem)
 		if(lem->count != 0)
 			lem->sum_lcm /= lem->count;
 	}
-	if (lem->sum_lcm < 1)
-		lem->sum_lcm = 1;
 }
 
 void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
@@ -81,7 +78,11 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	a->ant_room = r;
 	a->ant_room->has_ant = 1;
 	lem->board_ants -= r == lem->er ? 1 : 0;
-	ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
+	if(lem->color)
+		ft_printf(C_CYN "L" C_GRN "%d" C_RED "-" C_YEL "%s ",a->ant_id + 1, a->ant_room->name);
+	else
+		ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
+	// ft_printf(C_CYN "L");
 	lem->space = 1;
 }
 

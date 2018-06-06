@@ -83,7 +83,9 @@ void		read_rooms(t_lem *lem)
 				lem_error("invalid start room or end room");
 		}
 		else if (lem->line[0] == '#')
+		{
 			ft_strdel(&lem->line);
+		}
 		else if (line_validation(lem))
 			ft_strdel(&lem->line);
 		else

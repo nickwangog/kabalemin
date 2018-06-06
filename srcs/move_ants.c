@@ -53,7 +53,7 @@ void	best_lcm(t_lem *lem)
 	lem->count = lem->sr->num_links;
 	lem->sum_lcm = path_decision(lem);
 	lem->sum_lcm /= lem->count;
-	while ((lem->sum_lcm > lem->start_ants) && lem->sum_lcm > 1)
+	while (lem->sum_lcm > lem->start_ants && lem->count > 1)
 	{
 		lem->count--;
 		lem->sum_lcm = path_decision(lem);
@@ -70,24 +70,29 @@ void	move_ant(t_lem *lem, t_ants *a, t_rooms *r)
 	a->ant_room->has_ant = 1;
 	lem->board_ants -= r == lem->er ? 1 : 0;
 	ft_printf("L%d-%s ",a->ant_id + 1, a->ant_room->name);
+	//printf("start: %d | count: %d | sumlcm: %d | j: %d\n", lem->start_ants, lem->p_to_take, lem->sum_lcm, lem->j);
+	
 }
 
-void	move_antcheck(t_lem *lem, t_ants *a)
+void	move_antcheck(t_lem *lem, t_ants *a, t_rooms *r)
 {
-	if(lem->j <= lem->p_to_take)
+	t_rooms *p;
+
+	p = r;
+	if(lem->j < lem->p_to_take)
 	{
-		if(lem->p->link_room->has_ant == 0)
+		if(p->has_ant == 0)
 		{
-			move_ant(lem, a, lem->p->link_room);
+			move_ant(lem, a, p);
 			lem->j++;
 		}
 		else if(lem->j < lem->p_to_take)
 		{
-			if(lem->p->next)
+			if(p->path->next)
 			{
-				lem->p = lem->p->next;
-				if(lem->p->link_room->has_ant == 0)
-					move_ant(lem, a, lem->p->link_room);
+				p->path = p->path->next;
+				if(p->has_ant == 0)
+					move_ant(lem, a, p);
 				lem->j++;
 			}
 		}
@@ -102,45 +107,39 @@ void lem_ants(t_lem	*lem)
 	int16_t dist2;
 	
 	ant_init(lem, ants, lem->ant_num, lem->sr);
+	best_lcm(lem);
 	while (lem->board_ants)
 	{
 		i = -1;
 		while (++i < lem->ant_num)
 		{
-			if(i == 0 && lem->start_ants <= 2)
-			{
-				printf("start: %d | count: %d | sumlcm: %d | j: %d", lem->start_ants, lem->count, lem->sum_lcm, lem->j);
-				exit(1);
-			}
-			if (lem->sum_lcm > lem->start_ants)
+			if (lem->sum_lcm >= lem->start_ants)
 			{
 				best_lcm(lem);
-				lem->p_to_take--;
+				if (lem->p_to_take > 1)
+					lem->p_to_take--;
 			}
 			if (ants[i].ant_room->path->link_room == lem->er)
 				move_ant(lem, &ants[i], ants[i].ant_room->path->link_room);
 			else if (ants[i].ant_room == lem->er)
 				continue;
 			else if (ants[i].ant_room->path->link_room->has_ant == 0)
-				move_antcheck(lem, &ants[i]);
+				move_antcheck(lem, &ants[i], ants[i].ant_room->path->link_room);
 			else
 			{
 				lem->k = ants[i].ant_room->path->next;
-				while(lem->k)
+				while(lem->k && lem->j < lem->p_to_take)
 				{
-					dist1 = lem->dist[lem->p->link_room->room_id][lem->er->room_id]; 
+					dist1 = lem->dist[lem->k->link_room->room_id][lem->er->room_id]; 
 					dist2 = lem->dist[ants[i].ant_room->room_id][lem->er->room_id];
 					if (lem->k->link_room->has_ant == 0)
-						if(dist1 < dist2 && lem->board_ants < dist1)
-							move_antcheck(lem, &ants[i]);
+						if(dist1 < dist2)
+							move_antcheck(lem, &ants[i], lem->k->link_room);
 					lem->k = lem->k->next;
 				}
 			}
 			if(lem->j == lem->p_to_take)
-			{
 				lem->j = 0;
-				lem->p = lem->sr->path;
-			}
 		}
 		ft_putstr("\n");
 	}

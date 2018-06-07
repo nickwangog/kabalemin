@@ -105,7 +105,7 @@ void			check_endroom(t_lem *lem)
 	p = lem->sr->path;
 	while (p)
 	{
-		bfs(lem, p->link_room, -1);
+		bfs(lem, p->link_room, -1);	
 		p = p->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:31:59 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/05 14:35:59 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/06 17:22:29 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define C_WHT		"\x1b[37m"
 # define C_RESET	"\x1b[0m"
 # define INF 2147483647
+# define S_DIST lem->shortest[room_id][p->link_room->room_id]
+# define D_DIST lem->dist[room_id][r_check->room_id]
 
 typedef struct s_rooms	t_rooms;
 typedef struct s_lem	t_lem;

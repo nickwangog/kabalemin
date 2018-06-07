@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/05 17:44:22 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/06 17:19:36 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,20 @@ void			dijkstra(t_lem *lem, int16_t room_id, int i)
 		i++;
 	}
 	lem->dist[room_id][room_id] = 0;
-	i = 0;
-	while (i < lem->num_room)
+	i = -1;
+	while (++i < lem->num_room)
 	{
-		r_check = check_r(lem->dist[room_id], lem->shortest[room_id], lem->num_room, lem->head);
+		r_check = check_r(lem->dist[room_id], lem->shortest[room_id],
+			lem->num_room, lem->head);
 		lem->shortest[room_id][r_check->room_id] = 1;
 		p = r_check->path;
 		while (p)
 		{
-			if (!lem->shortest[room_id][p->link_room->room_id] && lem->dist[room_id][r_check->room_id] != INF
-					&& lem->dist[room_id][r_check->room_id] + 1 < lem->dist[room_id][p->link_room->room_id])
-				lem->dist[room_id][p->link_room->room_id] = lem->dist[room_id][r_check->room_id] + 1;
+			if (!S_DIST && D_DIST != INF
+					&& D_DIST + 1 < lem->dist[room_id][p->link_room->room_id])
+				lem->dist[room_id][p->link_room->room_id] = D_DIST + 1;
 			p = p->next;
 		}
-		i++;
 	}
 }
 
@@ -105,7 +105,7 @@ void			check_endroom(t_lem *lem)
 	p = lem->sr->path;
 	while (p)
 	{
-		bfs(lem, p->link_room, -1);	
+		bfs(lem, p->link_room, -1);
 		p = p->next;
 	}
 }

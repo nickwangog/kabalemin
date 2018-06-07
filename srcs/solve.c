@@ -6,7 +6,7 @@
 /*   By: lkaba <lkaba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:58:12 by nwang             #+#    #+#             */
-/*   Updated: 2018/06/06 17:19:36 by lkaba            ###   ########.fr       */
+/*   Updated: 2018/06/06 17:37:50 by lkaba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void			dijk_init(t_lem *lem)
 	int16_t		i;
 	t_rooms		*tmp;
 
-	i = 0;
+	i = -1;
 	lem->dist = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
 	lem->shortest = (uint32_t **)malloc(sizeof(uint32_t *) * lem->num_room);
-	while (i < lem->num_room)
+	!lem->dist && !lem->shortest ? lem_error("failed to malloc, dijkstra") : 0;
+	while (++i < lem->num_room)
 	{
 		lem->dist[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
 		lem->shortest[i] = (uint32_t *)malloc(sizeof(uint32_t) * lem->num_room);
-		i++;
 	}
 	tmp = lem->head;
 	while (tmp)
